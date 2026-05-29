@@ -9,8 +9,9 @@ import (
 )
 
 func main() {
-	finalcollector.Start()
-	utils.RegisterRoutes() // ✅ ADD THIS LINE
+	utils.ConnectDB()      // ✅ ensure DB connect
+	utils.RegisterRoutes() // ✅ REGISTER ROUTES FIRST
+	finalcollector.Start() // ✅ then start logic
 
 	defer utils.CloseDB()
 
