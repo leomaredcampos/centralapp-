@@ -10,6 +10,8 @@ import (
 
 func main() {
 	finalcollector.Start()
+	utils.RegisterRoutes() // ✅ ADD THIS LINE
+
 	defer utils.CloseDB()
 
 	log.Println("Backend running on :3000")
