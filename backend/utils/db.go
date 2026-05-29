@@ -13,11 +13,13 @@ import (
 var DB *sql.DB
 
 func ConnectDB() {
+	// ✅ FIX: huwag mag crash kahit walang .env
 	if err := godotenv.Load("utils/.env"); err != nil {
-		log.Fatal("Failed to load .env:", err)
+		log.Println("No .env file found, using environment variables")
 	}
 
-	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+	dsn := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
 		os.Getenv("DB_USER"),
@@ -36,7 +38,7 @@ func ConnectDB() {
 		log.Fatal("Failed to connect to DB:", err)
 	}
 
-	log.Println("Connected to centraldb")
+	log.Println("Connected to database ✅")
 }
 
 func CloseDB() {
