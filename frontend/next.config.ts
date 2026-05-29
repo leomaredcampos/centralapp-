@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:3000/api/:path*",
+        destination: "https://centralapp-27s1.onrender.com/api/:path*",
       },
     ];
   },
