@@ -13,20 +13,22 @@ import (
 var DB *sql.DB
 
 func ConnectDB() {
-	// ✅ FIX: huwag mag crash kahit walang .env
 	if err := godotenv.Load("utils/.env"); err != nil {
 		log.Println("No .env file found, using environment variables")
 	}
 
-	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-		os.Getenv("DB_SSLMODE"),
-	)
+	dsn := os.Getenv("DATABASE_URL")
+	if dsn == "" {
+		dsn = fmt.Sprintf(
+			"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+			os.Getenv("DB_HOST"),
+			os.Getenv("DB_PORT"),
+			os.Getenv("DB_USER"),
+			os.Getenv("DB_PASSWORD"),
+			os.Getenv("DB_NAME"),
+			os.Getenv("DB_SSLMODE"),
+		)
+	}
 
 	var err error
 	DB, err = sql.Open("postgres", dsn)
@@ -38,7 +40,7 @@ func ConnectDB() {
 		log.Fatal("Failed to connect to DB:", err)
 	}
 
-	log.Println("Connected to database ✅")
+	log.Println("Connected to centraldb")
 }
 
 func CloseDB() {
