@@ -9,11 +9,10 @@ import (
 )
 
 func main() {
-	utils.ConnectDB()      // ✅ ensure DB connect
-	utils.RegisterRoutes() // ✅ REGISTER ROUTES FIRST
-	finalcollector.Start() // ✅ then start logic
-
+	utils.ConnectDB()
 	defer utils.CloseDB()
+
+	finalcollector.Start()
 
 	log.Println("Backend running on :3000")
 	http.ListenAndServe(":3000", nil)
