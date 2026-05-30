@@ -249,10 +249,10 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
               <div><label className={lbl}>Contact 1</label><input name="companycontact1" value={form.companycontact1} onChange={handleChange} className={inp} /></div>
               <div><label className={lbl}>Contact 2</label><input name="companycontact2" value={form.companycontact2} onChange={handleChange} className={inp} /></div>
             </div>
-            <div className="mb-[2px]"><label className={lbl}>Company Address {req}</label><input name="companyaddress" value={form.companyaddress} onChange={handleChange} className={inp} /></div>
-            <div className="mb-[2px]"><label className={lbl}>Company Email 1</label><input name="companyemail1" value={form.companyemail1} onChange={handleChange} className={inp} /></div>
-            <div className="mb-[2px]"><label className={lbl}>Company Email 2</label><input name="companyemail2" value={form.companyemail2} onChange={handleChange} className={inp} /></div>
-            <div className="mb-[2px]"><label className={lbl}>Website</label><input name="companysite" value={form.companysite} onChange={handleChange} className={inp} /></div>
+            <div className="mb-[1px]"><label className={lbl}>Company Address {req}</label><input name="companyaddress" value={form.companyaddress} onChange={handleChange} className={inp} /></div>
+            <div className="mb-[1px]"><label className={lbl}>Company Email 1</label><input name="companyemail1" value={form.companyemail1} onChange={handleChange} className={inp} /></div>
+            <div className="mb-[1px]"><label className={lbl}>Company Email 2</label><input name="companyemail2" value={form.companyemail2} onChange={handleChange} className={inp} /></div>
+            <div className="mb-[1px]"><label className={lbl}>Website</label><input name="companysite" value={form.companysite} onChange={handleChange} className={inp} /></div>
           </div>
         </div>
 
