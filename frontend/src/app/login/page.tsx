@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import EmailStep from "./components/EmailStep";
 import OtpStep from "./components/OtpStep";
@@ -13,6 +13,19 @@ export default function LoginPage() {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<Step>("email");
   const [otpExpires, setOtpExpires] = useState(300);
+  const [imgWidth, setImgWidth] = useState(150);
+  const [imgHeight, setImgHeight] = useState(150);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = "/logo.png";
+    img.onload = () => {
+      if (img.naturalWidth !== img.naturalHeight) {
+        setImgWidth(300);
+        setImgHeight(50);
+      }
+    };
+  }, []);
 
   async function submitEmail() {
     if (!email) return { status: "error" };
@@ -74,7 +87,14 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-[#f5f5f5]">
       <div className="flex flex-col items-center bg-white p-[20px] pb-[40px] shadow-md">
-        <Image src="/logo.png" alt="Logo" width={150} height={150} />
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={imgWidth}
+          height={imgHeight}
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+          priority
+        />
         {step === "email" && (
           <EmailStep
             email={email}
