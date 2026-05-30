@@ -117,7 +117,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
   return (
     <div className="h-full flex flex-col border border-gray-200 rounded-lg bg-white overflow-hidden">
       {/* Datagrid — full width top */}
-      <div className="flex-1 overflow-hidden border-t border-gray-200">
+      <div className="flex-1 overflow-hidden border-t border-gray-200" style={{ height: "35%" }}>
         <UserInfoDataGrid
           users={users}
           onPrev={handlePrev}
@@ -126,7 +126,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
       </div>
 
       {/* 3 Panel Body */}
-      <div className="flex overflow-hidden" style={{ height: "61%" }}>
+      <div className="flex overflow-hidden" style={{ height: "63%" }}>
 
         {/* Panel 1 — Employee Info */}
         <div className="w-[48%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
