@@ -2,6 +2,7 @@ package companyfile
 
 import (
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -27,6 +28,9 @@ func HandleGetCompanyLogo(w http.ResponseWriter, r *http.Request) {
 		logoType = "login"
 	}
 
+	wd, _ := os.Getwd()
+	log.Printf("Current working directory: %s", wd)
+
 	var filePath string
 	if logoType == "login" {
 		filePath = filepath.Join("backend", "companyfile", "companyloginlogo", companyID, "logo.png")
@@ -37,8 +41,10 @@ func HandleGetCompanyLogo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("Attempting to open file: %s", filePath)
 	file, err := os.Open(filePath)
 	if err != nil {
+		log.Printf("File not found: %s, error: %v", filePath, err)
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
@@ -46,4 +52,5 @@ func HandleGetCompanyLogo(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "image/png")
 	io.Copy(w, file)
+	log.Printf("Successfully served file: %s", filePath)
 }
