@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function LeftUpper() {
   return (
-    <div className="h-[7%] border border-gray-300 flex items-center justify-center p-1">
+    <div className="h-[7%] border border-gray-300 flex items-center justify-center">
       <Image
         src="/left.png"
         alt="Logo"
