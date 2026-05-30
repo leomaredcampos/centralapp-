@@ -70,7 +70,11 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	go utils.SendOTPEmail(req.Email, otp)
+	if err := utils.SendOTPEmail(req.Email, otp); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "failed to send email", "details": err.Error()})
+		return
+	}
 
 	logOTPSent(req.Email, r)
 	resetAttempts("email:" + req.Email)
