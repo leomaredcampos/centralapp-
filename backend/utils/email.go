@@ -27,6 +27,8 @@ func SendOTPEmail(to, otp string) error {
 	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, user, []string{to}, []byte(msg))
 	if err != nil {
 		log.Printf("Email send error: %v", err)
+		return err
 	}
-	return err
+	log.Printf("Email sent successfully to %s", to)
+	return nil
 }
