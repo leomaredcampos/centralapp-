@@ -12,8 +12,8 @@ export default function LeftUpper() {
     img.src = "/logo.png";
     img.onload = () => {
       if (img.naturalWidth !== img.naturalHeight) {
-        setImgWidth(300);
-        setImgHeight(50);
+        setImgWidth(120);
+        setImgHeight(40);
       }
     };
   }, []);
