@@ -116,6 +116,15 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
   return (
     <div className="h-full flex flex-col border border-gray-200 rounded-lg bg-white overflow-hidden">
+      {/* Datagrid — full width top */}
+      <div className="flex-1 overflow-hidden border-t border-gray-200">
+        <UserInfoDataGrid
+          users={users}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      </div>
+
       {/* 3 Panel Body */}
       <div className="flex overflow-hidden" style={{ height: "63%" }}>
 
@@ -269,14 +278,6 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
       </div>
 
-      {/* Datagrid — full width bottom */}
-      <div className="flex-1 overflow-hidden border-t border-gray-200">
-        <UserInfoDataGrid
-          users={users}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
-      </div>
     </div>
   );
 });
