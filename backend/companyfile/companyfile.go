@@ -29,9 +29,9 @@ func HandleGetCompanyLogo(w http.ResponseWriter, r *http.Request) {
 
 	var filePath string
 	if logoType == "login" {
-		filePath = filepath.Join("companyfile", "companyloginlogo", companyID, "logo.png")
+		filePath = filepath.Join("backend", "companyfile", "companyloginlogo", companyID, "logo.png")
 	} else if logoType == "main" {
-		filePath = filepath.Join("companyfile", "companymainlogo", companyID, "favicon.png")
+		filePath = filepath.Join("backend", "companyfile", "companymainlogo", companyID, "favicon.png")
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		return
