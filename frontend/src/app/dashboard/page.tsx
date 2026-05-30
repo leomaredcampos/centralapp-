@@ -39,6 +39,21 @@ export default function DashboardPage() {
       ? JSON.stringify({ email: stored, sessionid })
       : JSON.stringify({ email: stored });
 
+    function forceLogout() {
+      // Delete TOTP session before logout para hindi ma-stuck
+      if (authtype === "totp" && sessionid) {
+        fetch("/api/delete-totp-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: stored, sessionid }),
+        });
+      }
+      localStorage.removeItem("email");
+      localStorage.removeItem("sessionid");
+      localStorage.removeItem("authtype");
+      window.location.href = "/login";
+    }
+
     fetch(checkUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -47,17 +62,16 @@ export default function DashboardPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.status !== "valid") {
-          localStorage.removeItem("email");
-          localStorage.removeItem("sessionid");
-          localStorage.removeItem("authtype");
-          window.location.href = "/login";
+          forceLogout();
         } else {
           setEmail(stored);
           fetchApps(stored);
         }
       });
 
-    // Periodic session check every 1 second
+    let failCount = 0;
+
+    // Periodic session check every 2 seconds (mas maluwag)
     const interval = setInterval(() => {
       const email = localStorage.getItem("email");
       const authtype = localStorage.getItem("authtype");
@@ -67,7 +81,6 @@ export default function DashboardPage() {
         return;
       }
       if (authtype === "totp" && sessionid) {
-        // This part of code calling the backend → /backend/credential/totpsession.go → HandleCheckTOTPSession
         fetch("/api/check-totp-session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -76,14 +89,19 @@ export default function DashboardPage() {
           .then((res) => res.json())
           .then((data) => {
             if (data.status !== "valid") {
-              localStorage.removeItem("email");
-              localStorage.removeItem("sessionid");
-              localStorage.removeItem("authtype");
-              window.location.href = "/login";
+              failCount++;
+              if (failCount >= 3) {
+                forceLogout();
+              }
+            } else {
+              failCount = 0;
             }
+          })
+          .catch(() => {
+            failCount++;
+            if (failCount >= 3) forceLogout();
           });
       } else {
-        // This part of code calling the backend → /backend/credential/session.go → HandleCheckSession
         fetch("/api/check-session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -92,12 +110,20 @@ export default function DashboardPage() {
           .then((res) => res.json())
           .then((data) => {
             if (data.status !== "valid") {
-              localStorage.removeItem("email");
-              window.location.href = "/login";
+              failCount++;
+              if (failCount >= 3) {
+                forceLogout();
+              }
+            } else {
+              failCount = 0;
             }
+          })
+          .catch(() => {
+            failCount++;
+            if (failCount >= 3) forceLogout();
           });
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
