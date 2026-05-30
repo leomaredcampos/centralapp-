@@ -74,7 +74,7 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-[#f5f5f5]">
       <div className="flex flex-col items-center bg-white p-[20px] pb-[40px] shadow-md">
-        <Image src="/logo.png" alt="Logo" width={300} height={50} />
+        <Image src="/logo.png" alt="Logo" width={50} height={50} />
         {step === "email" && (
           <EmailStep
             email={email}
