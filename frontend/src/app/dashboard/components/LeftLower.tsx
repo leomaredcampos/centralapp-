@@ -14,7 +14,7 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
   const btnClass = "w-full p-[2px] leading-none bg-transparent border-t-0 border-b border-[#333] border-l-0 border-r-0 cursor-pointer text-[#333] hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium";
 
   return (
-    <div className="h-[95%] border border-gray-300 flex flex-col p-[20px] gap-[10px]">
+    <div className="h-[93%] border border-gray-300 flex flex-col p-[20px] gap-[10px]">
       {activeApp ? (
         <>
           <button onClick={onUserInfoData} className={btnClass}>User Info Data</button>
