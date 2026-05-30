@@ -19,12 +19,12 @@ interface Props {
 
 export default function RightLower({ show2FA, apps, activeApp, onAppClick, userInfoRef }: Props) {
   if (show2FA) return (
-    <div className="h-[95%] border border-gray-300 bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="h-[93%] border border-gray-300 bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <TwoFactorPage />
     </div>
   );
   if (activeApp === "userinfoapp") return (
-    <div className="h-[95%] border border-gray-300 p-[10px] flex bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="h-[93%] border border-gray-300 p-[10px] flex bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="flex-1 min-h-0">
         <AppUserInfoRightBody ref={userInfoRef} />
       </div>
@@ -32,7 +32,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
   );
 
   return (
-    <div className="h-[95%] border border-gray-300 overflow-y-auto p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="h-[93%] border border-gray-300 overflow-y-auto p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="w-[75%] h-full flex flex-col rounded-lg border border-gray-200 shadow-sm bg-white">
         <div className="px-[20px] py-[12px] border-b border-gray-200">
           <span className="text-[11pt] text-gray-500">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
