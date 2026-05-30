@@ -106,12 +106,6 @@ export default function TwoFactorPage() {
         >
           Disable
         </button>
-        <button
-          onClick={() => window.location.reload()}
-          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors"
-        >
-          ← Back
-        </button>
       </div>
     );
   }
@@ -126,12 +120,6 @@ export default function TwoFactorPage() {
           className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors disabled:opacity-50"
         >
           Setup 2FA
-        </button>
-        <button
-          onClick={() => window.location.reload()}
-          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors"
-        >
-          ← Back
         </button>
       </div>
     );
@@ -159,12 +147,6 @@ export default function TwoFactorPage() {
         className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Verify
-      </button>
-      <button
-        onClick={() => window.location.reload()}
-        className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors"
-      >
-        ← Back
       </button>
     </div>
   );
