@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = "/logo.png";
+    img.src = "/api/company-logo?type=login&id=1";
     img.onload = () => {
       if (img.naturalWidth !== img.naturalHeight) {
         setImgWidth(300);
@@ -88,7 +88,7 @@ export default function LoginPage() {
     <div className="flex items-center justify-center h-screen w-screen bg-[#f5f5f5]">
       <div className="flex flex-col items-center bg-white p-[20px] pb-[40px] shadow-md">
         <Image
-          src="/logo.png"
+          src="/api/company-logo?type=login&id=1"
           alt="Logo"
           width={imgWidth}
           height={imgHeight}

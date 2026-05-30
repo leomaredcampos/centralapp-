@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CentralApp",
   description: "CentralApp",
+  icons: {
+    icon: "/api/company-logo?type=main&id=1",
+  },
 };
 
 export const viewport: Viewport = {

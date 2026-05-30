@@ -4,6 +4,7 @@ import (
 	"centralapp/backend/apps"
 	"centralapp/backend/appuserinfo/rightbody/appuserinfoUSERDATA"
 	"centralapp/backend/centralizeaudit"
+	"centralapp/backend/companyfile"
 	"centralapp/backend/credential"
 	"centralapp/backend/redisconnection"
 	"centralapp/backend/userinfouserdata"
@@ -19,4 +20,5 @@ func Group0001() {
 	apps.RegisterRoutes()
 	appuserinfoUSERDATA.RegisterRoutes()
 	userinfouserdata.RegisterRoutes()
+	companyfile.RegisterRoutes()
 }
