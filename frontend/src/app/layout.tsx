@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import "./globals.css";
+import RegisterSW from "./register-sw";
 
 export const metadata: Metadata = {
   title: "CentralApp",
   description: "CentralApp",
+  manifest: "/manifest.json",
   icons: {
     icon: "/api/company-logo?type=main&id=1",
+    apple: "/api/company-logo?type=main&id=1",
   },
 };
 
@@ -24,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif", fontSize: "8pt" }}>{children}</body>
+      <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif", fontSize: "8pt" }}>
+        <RegisterSW />
+        {children}
+      </body>
     </html>
   );
 }
