@@ -20,6 +20,10 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  // Don't cache POST requests (API calls) — only cache GET (static assets)
+  if (event.request.method !== "GET") {
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);

@@ -24,6 +24,12 @@ func RegisterRoutes() {
 }
 
 func ClearOTPSessions() {
-	utils.DB.Exec("UPDATE userinfotbl SET otpstatus='', otpkey=''")
-	log.Println("All sessions cleared on startup")
+	// Only clear stale sessions (older than 1 day), preserve active sessions
+	utils.DB.Exec(`
+		UPDATE userinfotbl 
+		SET otpstatus='', otpkey='' 
+		WHERE otpstatus='locked' 
+		AND otplogindate < NOW() - INTERVAL '1 day'
+	`)
+	log.Println("Stale OTP sessions cleared on startup")
 }

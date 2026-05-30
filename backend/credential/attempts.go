@@ -1,11 +1,11 @@
 package credential
 
 import (
-	"strconv"
-	"sync"
+	"database/sql"
+	"log"
 	"time"
 
-	"centralapp/backend/redisconnection"
+	"centralapp/backend/utils"
 )
 
 const (
@@ -14,132 +14,73 @@ const (
 	otpExpiry    = 5 * time.Minute
 )
 
-// in-memory fallback when Redis is not available
-var (
-	memAttempts = map[string]*memRecord{}
-	memMu       sync.Mutex
-)
-
-type memRecord struct {
-	count     int
-	lockedAt  time.Time
-	otpSentAt time.Time
-}
-
-func getMemRecord(key string) *memRecord {
-	if memAttempts[key] == nil {
-		memAttempts[key] = &memRecord{}
-	}
-	return memAttempts[key]
-}
-
 func isLocked(key string) (bool, int) {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		r := getMemRecord(key)
-		if r.count >= maxAttempts {
-			remaining := int(lockDuration.Seconds() - time.Since(r.lockedAt).Seconds())
-			if remaining > 0 {
-				return true, remaining
-			}
-			r.count = 0
-		}
-		return false, 0
-	}
-	val, err := redisconnection.RDB.Get(redisconnection.Ctx, "lock:"+key).Result()
+	var count int
+	var lockedAt sql.NullTime
+	err := utils.DB.QueryRow("SELECT count, locked_at FROM login_attempts WHERE keyx=$1", key).Scan(&count, &lockedAt)
 	if err != nil {
 		return false, 0
 	}
-	ttl := redisconnection.RDB.TTL(redisconnection.Ctx, "lock:"+key).Val()
-	remaining, _ := strconv.Atoi(val)
-	if remaining >= maxAttempts {
-		return true, int(ttl.Seconds())
+	if count >= maxAttempts && lockedAt.Valid {
+		remaining := int(lockDuration.Seconds() - time.Since(lockedAt.Time).Seconds())
+		if remaining > 0 {
+			return true, remaining
+		}
+		// Lock expired, reset
+		utils.DB.Exec("DELETE FROM login_attempts WHERE keyx=$1", key)
 	}
 	return false, 0
 }
 
 func recordAttempt(key string) (bool, int) {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		r := getMemRecord(key)
-		r.count++
-		if r.count >= maxAttempts {
-			r.lockedAt = time.Now()
-			return true, int(lockDuration.Seconds())
-		}
+	_, err := utils.DB.Exec(`
+		INSERT INTO login_attempts (keyx, count, locked_at)
+		VALUES ($1, 1, NULL)
+		ON CONFLICT (keyx) DO UPDATE SET count = login_attempts.count + 1
+	`, key)
+	if err != nil {
+		log.Printf("recordAttempt error: %v", err)
 		return false, 0
 	}
-	count, _ := redisconnection.RDB.Incr(redisconnection.Ctx, "lock:"+key).Result()
-	if count == 1 {
-		redisconnection.RDB.Expire(redisconnection.Ctx, "lock:"+key, lockDuration)
-	}
-	if count >= int64(maxAttempts) {
-		redisconnection.RDB.Expire(redisconnection.Ctx, "lock:"+key, lockDuration)
+
+	var count int
+	utils.DB.QueryRow("SELECT count FROM login_attempts WHERE keyx=$1", key).Scan(&count)
+
+	if count >= maxAttempts {
+		utils.DB.Exec("UPDATE login_attempts SET locked_at=$1 WHERE keyx=$2", time.Now(), key)
 		return true, int(lockDuration.Seconds())
 	}
 	return false, 0
 }
 
 func resetAttempts(key string) {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		delete(memAttempts, key)
-		return
-	}
-	redisconnection.RDB.Del(redisconnection.Ctx, "lock:"+key)
+	utils.DB.Exec("DELETE FROM login_attempts WHERE keyx=$1", key)
 }
 
 func setOTPSentAt(email string) {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		getMemRecord(email).otpSentAt = time.Now()
-		return
-	}
-	redisconnection.RDB.Set(redisconnection.Ctx, "otp_sent:"+email, time.Now().Unix(), otpExpiry)
+	utils.DB.Exec(`
+		INSERT INTO login_attempts (keyx, otp_sent_at)
+		VALUES ($1, $2)
+		ON CONFLICT (keyx) DO UPDATE SET otp_sent_at = $2
+	`, email, time.Now())
 }
 
 func isOTPExpired(email string) bool {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		r := getMemRecord(email)
-		if r.otpSentAt.IsZero() {
-			return true
-		}
-		return time.Since(r.otpSentAt) > otpExpiry
-	}
-	val, err := redisconnection.RDB.Get(redisconnection.Ctx, "otp_sent:"+email).Result()
-	if err != nil {
+	var otpSentAt sql.NullTime
+	err := utils.DB.QueryRow("SELECT otp_sent_at FROM login_attempts WHERE keyx=$1", email).Scan(&otpSentAt)
+	if err != nil || !otpSentAt.Valid {
 		return true
 	}
-	sentAt, _ := strconv.ParseInt(val, 10, 64)
-	return time.Since(time.Unix(sentAt, 0)) > otpExpiry
+	return time.Since(otpSentAt.Time) > otpExpiry
 }
 
 func otpSecondsRemaining(email string) int {
-	if redisconnection.RDB == nil {
-		memMu.Lock()
-		defer memMu.Unlock()
-		r := getMemRecord(email)
-		if r.otpSentAt.IsZero() {
-			return 0
-		}
-		remaining := int(otpExpiry.Seconds() - time.Since(r.otpSentAt).Seconds())
-		if remaining < 0 {
-			return 0
-		}
-		return remaining
-	}
-	val, err := redisconnection.RDB.Get(redisconnection.Ctx, "otp_sent:"+email).Result()
-	if err != nil {
+	var otpSentAt sql.NullTime
+	err := utils.DB.QueryRow("SELECT otp_sent_at FROM login_attempts WHERE keyx=$1", email).Scan(&otpSentAt)
+	if err != nil || !otpSentAt.Valid {
 		return 0
 	}
-	sentAt, _ := strconv.ParseInt(val, 10, 64)
-	remaining := int(otpExpiry.Seconds() - time.Since(time.Unix(sentAt, 0)).Seconds())
+	remaining := int(otpExpiry.Seconds() - time.Since(otpSentAt.Time).Seconds())
 	if remaining < 0 {
 		return 0
 	}

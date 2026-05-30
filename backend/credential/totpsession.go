@@ -71,7 +71,18 @@ func createTOTPSession(email string) (string, error) {
 	var count int
 	utils.DB.QueryRow("SELECT COUNT(*) FROM usertotp_sessions WHERE emailx=$1", email).Scan(&count)
 	if count >= maxTOTPSessions {
-		return "", nil
+		// Delete the oldest session to make room
+		_, err := utils.DB.Exec(`
+			DELETE FROM usertotp_sessions 
+			WHERE datemade = (
+				SELECT MIN(datemade) FROM usertotp_sessions 
+				WHERE emailx=$1
+			)
+			AND emailx = $1
+		`, email)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	sessionid := generateSessionID()
