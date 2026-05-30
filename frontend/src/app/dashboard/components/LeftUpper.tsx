@@ -6,7 +6,7 @@ export default function LeftUpper() {
   return (
     <div className="h-[7%] border border-gray-300 flex items-center justify-center p-1">
       <Image
-        src="/logo.png"
+        src="/left.png"
         alt="Logo"
         width={100}
         height={100}
