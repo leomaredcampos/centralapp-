@@ -6,8 +6,8 @@ import UserInfoDataGrid from "./components/UserInfoDataGrid";
 const inp = "w-full p-[1px] border border-gray-300 outline-none";
 const lbl = "text-gray-500 leading-none";
 const req = <span className="text-red-500">*</span>;
-const row2 = "grid grid-cols-2 gap-[3px] mb-[2px]";
-const row3 = "grid grid-cols-3 gap-[3px] mb-[2px]";
+const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
+const row3 = "grid grid-cols-3 gap-[2px] mb-[1px]";
 
 export interface UserInfoHandle {
   getFiles: () => FileList | null;
@@ -130,10 +130,10 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
         {/* Panel 1 — Employee Info */}
         <div className="w-[48%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
-          <div className="flex-shrink-0 px-[6px] py-[2px] border-b border-gray-200 bg-gray-50">
+          <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
             <span className="text-gray-600">Employee Information</span>
           </div>
-          <div className="flex-1 px-[6px] py-[3px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
+          <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
             <div className={row3}>
               <div><label className={lbl}>Firstname {req}</label><input name="fname" value={form.fname} onChange={handleChange} className={inp} /></div>
               <div><label className={lbl}>Lastname {req}</label><input name="lname" value={form.lname} onChange={handleChange} className={inp} /></div>
@@ -213,10 +213,10 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
         {/* Panel 2 — Company Info */}
         <div className="w-[25.5%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
-          <div className="flex-shrink-0 px-[6px] py-[2px] border-b border-gray-200 bg-gray-50">
+          <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
             <span className="text-gray-600">Company Information</span>
           </div>
-          <div className="flex-1 px-[6px] py-[3px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
+          <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
             <div className={row2}>
               <div><label className={lbl}>Company ID</label><input name="companyid" value={form.companyid} onChange={handleChange} className={inp} /></div>
               <div><label className={lbl}>Company Name</label><input name="companyname" value={form.companyname} onChange={handleChange} className={inp} /></div>
@@ -258,10 +258,10 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
         {/* Panel 3 — System Info + Datagrid */}
         <div className="w-[26.5%] h-full flex flex-col overflow-hidden">
-          <div className="flex-shrink-0 px-[6px] py-[2px] border-b border-gray-200 bg-gray-50">
+          <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
             <span className="text-gray-600">System Information</span>
           </div>
-          <div className="flex-shrink-0 px-[6px] py-[3px]">
+          <div className="flex-shrink-0 px-[6px] py-[1px]">
             <div className={row2}>
               <div><label className={lbl}>Employee Account Status</label><input readOnly className={`${inp} bg-gray-50`} /></div>
               <div><label className={lbl}>As Date of</label><input readOnly className={`${inp} bg-gray-50`} /></div>
