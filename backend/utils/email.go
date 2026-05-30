@@ -1,83 +1,44 @@
 package utils
 
 import (
-	"crypto/tls"
 	"fmt"
 	"log"
-	"net/smtp"
 	"os"
+
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 func SendOTPEmail(to, otp string) error {
-	user := os.Getenv("EMAIL_USER")
-	password := os.Getenv("EMAIL_PASSWORD")
-	smtpHost := os.Getenv("EMAIL_SMTP")
-	if smtpHost == "" {
-		smtpHost = "smtp.gmail.com"
-	}
-	smtpPort := os.Getenv("EMAIL_PORT")
-	if smtpPort == "" {
-		smtpPort = "465"
+	apiKey := os.Getenv("SENDGRID_API_KEY")
+	if apiKey == "" {
+		return fmt.Errorf("SENDGRID_API_KEY not set")
 	}
 
-	log.Printf("Sending email - User: %s, Host: %s, Port: %s, Password length: %d", user, smtpHost, smtpPort, len(password))
-
-	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: Your OTP Code\r\n\r\nYour OTP code is: %s", user, to, otp)
-
-	auth := smtp.PlainAuth("", user, password, smtpHost)
-	
-	tlsConfig := &tls.Config{
-		InsecureSkipVerify: false,
-		ServerName:         smtpHost,
+	fromEmail := os.Getenv("EMAIL_USER")
+	if fromEmail == "" {
+		fromEmail = "noreply@yourdomain.com"
 	}
 
-	conn, err := tls.Dial("tcp", smtpHost+":"+smtpPort, tlsConfig)
+	from := mail.NewEmail("CentralApp", fromEmail)
+	subject := "Your OTP Code"
+	toEmail := mail.NewEmail("", to)
+	plainTextContent := fmt.Sprintf("Your OTP code is: %s", otp)
+	htmlContent := fmt.Sprintf("<strong>Your OTP code is: %s</strong>", otp)
+	message := mail.NewSingleEmail(from, subject, toEmail, plainTextContent, htmlContent)
+
+	client := sendgrid.NewSendClient(apiKey)
+	response, err := client.Send(message)
 	if err != nil {
-		log.Printf("TLS dial error: %v", err)
-		return err
-	}
-	defer conn.Close()
-
-	client, err := smtp.NewClient(conn, smtpHost)
-	if err != nil {
-		log.Printf("SMTP client error: %v", err)
-		return err
-	}
-	defer client.Quit()
-
-	if err = client.Auth(auth); err != nil {
-		log.Printf("Auth error: %v", err)
+		log.Printf("SendGrid error: %v", err)
 		return err
 	}
 
-	if err = client.Mail(user); err != nil {
-		log.Printf("Mail from error: %v", err)
-		return err
+	if response.StatusCode >= 400 {
+		log.Printf("SendGrid failed with status %d: %s", response.StatusCode, response.Body)
+		return fmt.Errorf("failed to send email: status %d", response.StatusCode)
 	}
 
-	if err = client.Rcpt(to); err != nil {
-		log.Printf("Rcpt to error: %v", err)
-		return err
-	}
-
-	w, err := client.Data()
-	if err != nil {
-		log.Printf("Data error: %v", err)
-		return err
-	}
-
-	_, err = w.Write([]byte(msg))
-	if err != nil {
-		log.Printf("Write error: %v", err)
-		return err
-	}
-
-	err = w.Close()
-	if err != nil {
-		log.Printf("Close error: %v", err)
-		return err
-	}
-
-	log.Printf("Email sent successfully to %s", to)
+	log.Printf("Email sent successfully to %s via SendGrid", to)
 	return nil
 }
