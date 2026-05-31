@@ -12,7 +12,7 @@ interface Props {
 
 export default function EmployeeInfoPanel({ form, onChange }: Props) {
   return (
-    <>
+    <div className="w-full min-w-0 h-full flex flex-col overflow-hidden">
       <div className="flex-shrink-0 px-[clamp(4px,0.44vw,8px)] py-[clamp(1px,0.07vw,2px)] border-b border-gray-200 bg-gray-50">
         <span className="text-gray-600 text-[clamp(8px,0.78vw,16px)]">Employee Information</span>
       </div>
@@ -92,6 +92,6 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
           <div className="col-span-3"><label className={lbl}>Employee Email Address {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

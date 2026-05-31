@@ -104,7 +104,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
       </div>
 
       {/* 3-Panel Body */}
-      <div className="flex overflow-hidden" style={{ height: "63%" }}>
+      <div className="flex overflow-hidden min-w-0" style={{ height: "63%" }}>
         <div className="w-[48%] min-w-0 h-full flex flex-col border-r border-gray-200 overflow-hidden">
           <EmployeeInfoPanel form={form} onChange={handleChange} />
         </div>
