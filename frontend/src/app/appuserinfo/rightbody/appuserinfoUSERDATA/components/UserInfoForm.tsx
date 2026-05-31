@@ -2,12 +2,12 @@
 
 import { useRef, useState, useEffect } from "react";
 
-const inp = "w-full text-[clamp(10pt,0.78vw,16px)] p-[1px] border-[0.25px] border-black outline-none";
-const lbl = "text-[clamp(10pt,0.78vw,16px)] text-black";
+const inp = "w-full text-[clamp(10px,0.78vw,16px)] p-[1px] border-[0.25px] border-black outline-none";
+const lbl = "text-[clamp(10px,0.78vw,16px)] text-black";
 const req = <span className="text-red-500">*</span>;
 const row4 = "grid grid-cols-4 gap-[4px] mb-[4px]";
 const row2 = "grid grid-cols-2 gap-[4px] mb-[4px]";
-const btnClass = "text-[clamp(10pt,0.78vw,16px)] px-[12px] py-[1px] bg-white border-[0.25px] border-black cursor-pointer hover:bg-gray-50";
+const btnClass = "text-[clamp(10px,0.78vw,16px)] px-[12px] py-[1px] bg-white border-[0.25px] border-black cursor-pointer hover:bg-gray-50";
 
 interface Props {
   form: Record<string, string>;
@@ -117,7 +117,7 @@ export default function UserInfoForm({ form, onChange, onSave, loading, files, s
             <div><label className={lbl}>Employee Email Address {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
           </div>
           <div className="border-b-[0.25px] border-black pb-[2px] mb-[4px]">
-            <span className="text-[clamp(10pt,0.78vw,16px)] text-black">Company Information</span>
+            <span className="text-[clamp(10px,0.78vw,16px)] text-black">Company Information</span>
           </div>
         </div>
 
