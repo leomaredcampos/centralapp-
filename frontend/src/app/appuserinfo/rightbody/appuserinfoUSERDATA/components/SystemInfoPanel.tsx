@@ -1,14 +1,14 @@
 "use client";
 
-const lbl = "text-black 500 leading-none text-[clamp(8px,0.78vw,16px)]";
-const inp = "w-full p-[1px] border-[0.25px] border-black 300 outline-none text-[clamp(8px,0.78vw,16px)]";
+const lbl = "text-black leading-none text-[clamp(8px,0.78vw,16px)]";
+const inp = "w-full p-[1px] border-[0.25px] border-black outline-none text-[clamp(8px,0.78vw,16px)]";
 const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 
 export default function SystemInfoPanel() {
   return (
     <>
-      <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black 200 bg-gray-50">
-        <span className="text-black 600 text-[clamp(8px,0.78vw,16px)]">System Information</span>
+      <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
+        <span className="text-black text-[clamp(8px,0.78vw,16px)]">System Information</span>
       </div>
       <div className="flex-shrink-0 px-[6px] py-[1px]">
         <div className={row2}>

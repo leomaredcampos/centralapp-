@@ -54,9 +54,9 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
   }));
 
   return (
-    <div className="h-full flex flex-col border-[0.25px] border-black 200 rounded-lg bg-white overflow-hidden">
+    <div className="h-full flex flex-col border-[0.25px] border-black rounded-lg bg-white overflow-hidden">
       {/* Datagrid */}
-      <div className="overflow-hidden border-t-[0.25px] border-black 200" style={{ flex: "0 0 35%" }}>
+      <div className="overflow-hidden border-t-[0.25px] border-black" style={{ flex: "0 0 35%" }}>
         <UserInfoDataGrid
           users={users}
           onPrev={handlePrev}
@@ -66,10 +66,10 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
       {/* 3-Panel Body */}
       <div className="flex overflow-hidden min-w-0" style={{ flex: "0 0 63%" }}>
-        <div className="w-[48%] min-w-0 h-full flex flex-col border-r-[0.25px] border-black 200 overflow-hidden">
+        <div className="w-[48%] min-w-0 h-full flex flex-col border-r-[0.25px] border-black overflow-hidden">
           <EmployeeInfoPanel form={form} onChange={handleChange} />
         </div>
-        <div className="w-[25.5%] min-w-0 h-full flex flex-col border-r-[0.25px] border-black 200 overflow-hidden">
+        <div className="w-[25.5%] min-w-0 h-full flex flex-col border-r-[0.25px] border-black overflow-hidden">
           <CompanyInfoPanel form={form} onChange={handleChange} />
         </div>
         <div className="w-[26.5%] min-w-0 h-full flex flex-col overflow-hidden">

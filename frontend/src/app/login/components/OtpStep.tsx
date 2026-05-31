@@ -68,7 +68,7 @@ export default function OtpStep({ otp, setOtp, onSubmit, expiresIn, onExpired }:
         className="w-[350px] text-[9pt] p-[2px] border-[0.25px] border-black outline-none text-center tracking-[4px] disabled:opacity-50"
       />
       <p className="text-[9pt] text-center text-black mt-[2px] mb-0">OTP</p>
-      <p className="text-[9pt] text-center text-black 400 mt-[2px]">
+      <p className="text-[9pt] text-center text-black mt-[2px]">
         Expires in {minutes}:{seconds.toString().padStart(2, "0")}
       </p>
       {countdown > 0 ? (
