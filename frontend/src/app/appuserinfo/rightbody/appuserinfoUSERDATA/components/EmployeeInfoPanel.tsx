@@ -58,13 +58,31 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
           <div><label className={lbl}>Height</label><input name="userheight" value={form.userheight} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Weight</label><input name="userweight" value={form.userweight} onChange={onChange} className={inp} /></div>
         </div>
-        <div className="grid grid-cols-4 gap-[1px] mb-[0px]">
-          <div><label className={lbl}>ID Photo {req}</label><input type="file" name="idphoto" className="w-full text-[clamp(6px,0.58vw,10px)]" /></div>
-          <div><label className={lbl}>Signature {req}</label><input type="file" name="usersign" className="w-full text-[clamp(6px,0.58vw,10px)]" /></div>
-          <div className="col-span-2"><label className={lbl}>Others {req}</label><input type="file" name="requirementsx" multiple className="w-full text-[clamp(6px,0.58vw,10px)]" /></div>
+        <div className="grid grid-cols-3 gap-[1px] mb-[0px]">
+          <div>
+            <label className={lbl}>ID Photo {req}</label>
+            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
+              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+              <input type="file" name="idphoto" className="hidden" />
+            </label>
+          </div>
+          <div>
+            <label className={lbl}>Signature {req}</label>
+            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
+              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+              <input type="file" name="usersign" className="hidden" />
+            </label>
+          </div>
+          <div>
+            <label className={lbl}>Others {req}</label>
+            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
+              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+              <input type="file" name="requirementsx" multiple className="hidden" />
+            </label>
+          </div>
         </div>
-        <div className="mb-[0px]"><label className={lbl}>Employee Complete Address {req}</label><input name="useraddress" value={form.useraddress} onChange={onChange} className={inp} /></div>
-        <div className="mb-[0px]"><label className={lbl}>Employee Email Address {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
+        <div className="mb-[0px]"><label className={lbl}>Address {req}</label><input name="useraddress" value={form.useraddress} onChange={onChange} className={inp} /></div>
+        <div className="mb-[0px]"><label className={lbl}>Email {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
       </div>
     </div>
   );
