@@ -1,7 +1,7 @@
 "use client";
 
-const lbl = "text-black leading-none text-[clamp(9.5px,0.78vw,16px)]";
-const inp = "w-full p-[1px] border-[0.25px] border-black outline-none text-[clamp(9.5px,0.78vw,16px)]";
+const lbl = "text-black leading-none text-[clamp(10.5px,0.78vw,16px)]";
+const inp = "w-full p-[1px] border-[0.25px] border-black outline-none text-[clamp(10.5px,0.78vw,16px)]";
 const req = <span className="text-red-500">*</span>;
 const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 
@@ -14,7 +14,7 @@ export default function CompanyInfoPanel({ form, onChange }: Props) {
   return (
     <>
       <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
-        <span className="text-black text-[clamp(9.5px,0.78vw,16px)]">Company Information</span>
+        <span className="text-black text-[clamp(10.5px,0.78vw,16px)]">Company Information</span>
       </div>
       <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
         <div className={row2}>
@@ -33,14 +33,14 @@ export default function CompanyInfoPanel({ form, onChange }: Props) {
           <div>
             <label className={lbl}>Company Main Logo</label>
             <label className="flex items-center gap-[3px] border-[0.25px] border-black p-[1px] cursor-pointer w-full">
-              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(9.5px,0.78vw,16px)]">Choose file</span>
+              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10.5px,0.78vw,16px)]">Choose file</span>
               <input type="file" name="companymainlogo" accept=".ico" className="hidden" />
             </label>
           </div>
           <div>
             <label className={lbl}>Company Login Logo</label>
             <label className="flex items-center gap-[3px] border-[0.25px] border-black p-[1px] cursor-pointer w-full">
-              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(9.5px,0.78vw,16px)]">Choose file</span>
+              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10.5px,0.78vw,16px)]">Choose file</span>
               <input type="file" name="companyloginlogo" accept=".png" className="hidden" />
             </label>
           </div>
