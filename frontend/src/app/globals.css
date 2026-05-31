@@ -19,13 +19,37 @@
   }
 }
 
+html {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Calibri, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 *, input, select, button, textarea, label, span, th, td {
   font-size: inherit;
   font-family: inherit;
+}
+
+@media (orientation: landscape) {
+  body {
+    font-size: min(0.78vw, 1.2vh);
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    font-size: 0.78vw;
+  }
 }

@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif", fontSize: "clamp(8px, 0.78vw, 16px)" }}>
+      <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif", fontSize: "clamp(8px, min(0.78vw, 1.2vh), 14px)" }}>
         <RegisterSW />
         {children}
       </body>
