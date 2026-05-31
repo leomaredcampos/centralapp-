@@ -10,7 +10,7 @@ export default function EnabledView({ onDisable, loading }: Props) {
       <button
         onClick={onDisable}
         disabled={loading}
-        className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t-[0.25px] border-b-[0.25px] border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Disable
       </button>

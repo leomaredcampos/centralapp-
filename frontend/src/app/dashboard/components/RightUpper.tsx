@@ -17,7 +17,7 @@ interface Props {
   userInfoRef?: React.RefObject<UserInfoHandle | null>;
 }
 
-const btnClass = "px-[8px] py-[1px] bg-white border border-black 300 cursor-pointer hover:bg-gray-50";
+const btnClass = "px-[8px] py-[1px] bg-white border-[0.25px] border-black 300 cursor-pointer hover:bg-gray-50";
 
 export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, searchList = [], searchVal = "", onSearchChange, onPrev, onNext, userInfoRef }: Props) {
   const isUserInfo = activeApp === "userinfoapp";
@@ -32,13 +32,13 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
-    <div className="h-[7%] border border-black 300 flex flex-col">
+    <div className="h-[7%] border-[0.25px] border-black 300 flex flex-col">
       {/* Row 1 */}
-      <div className="flex-1 flex items-center px-[10px] gap-[8px] border-b border-black 200">
+      <div className="flex-1 flex items-center px-[10px] gap-[8px] border-b-[0.25px] border-black 200">
         <span>{show2FA ? "2FA" : isUserInfo ? "Employee Information App" : "Module"}</span>
         {isUserInfo && !show2FA && (
           <>
-            <label className="text-blue-600 border-b border-blue-600 cursor-pointer">
+            <label className="text-blue-600 border-b-[0.25px] border-blue-600 cursor-pointer">
               Choose File
               <input type="file" multiple accept="*" onChange={(e) => userInfoRef?.current?.setFiles(e.target.files)} className="hidden" />
             </label>

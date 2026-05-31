@@ -1,7 +1,7 @@
 "use client";
 
 const lbl = "text-black 500 leading-none text-[clamp(8px,0.78vw,16px)]";
-const inp = "w-full p-[1px] border border-black 300 outline-none text-[clamp(8px,0.78vw,16px)]";
+const inp = "w-full p-[1px] border-[0.25px] border-black 300 outline-none text-[clamp(8px,0.78vw,16px)]";
 const req = <span className="text-red-500">*</span>;
 const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 const row3 = "grid grid-cols-3 gap-[2px] mb-[1px]";
@@ -14,7 +14,7 @@ interface Props {
 export default function EmployeeInfoPanel({ form, onChange }: Props) {
   return (
     <div className="w-full min-w-0 h-full flex flex-col overflow-hidden">
-      <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-black 200 bg-gray-50">
+      <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black 200 bg-gray-50">
         <span className="text-black 600 text-[clamp(8px,0.78vw,16px)]">Employee Information</span>
       </div>
       <div className="flex-1 min-h-0 px-[6px] py-[1px] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
@@ -56,8 +56,8 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
             <div><label className={lbl}>Biometric ID</label><input name="userbio" value={form.userbio} onChange={onChange} className={inp} /></div>
             <div>
               <label className={lbl}>ID Photo {req}</label>
-              <label className="flex items-center gap-[2px] border border-black 300 p-[0px] cursor-pointer w-full">
-                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
+              <label className="flex items-center gap-[2px] border-[0.25px] border-black 300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                 <input type="file" name="idphoto" className="hidden" />
               </label>
             </div>
@@ -72,15 +72,15 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
           <div className="grid" style={{ gridTemplateColumns: "59% 40%", gap: "1%" }}>
             <div>
               <label className={lbl}>Signature {req}</label>
-              <label className="flex items-center gap-[2px] border border-black 300 p-[0px] cursor-pointer w-full">
-                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
+              <label className="flex items-center gap-[2px] border-[0.25px] border-black 300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                 <input type="file" name="usersign" className="hidden" />
               </label>
             </div>
             <div>
               <label className={lbl}>Others {req}</label>
-              <label className="flex items-center gap-[2px] border border-black 300 p-[0px] cursor-pointer w-full">
-                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
+              <label className="flex items-center gap-[2px] border-[0.25px] border-black 300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                 <input type="file" name="requirementsx" multiple className="hidden" />
               </label>
             </div>
