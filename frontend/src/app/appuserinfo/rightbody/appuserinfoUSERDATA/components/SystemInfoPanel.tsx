@@ -6,11 +6,11 @@ const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 
 export default function SystemInfoPanel() {
   return (
-    <>
+    <div className="w-full min-w-0 h-full flex flex-col overflow-hidden">
       <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
         <span className="text-black text-[clamp(10px,0.78vw,16px)]">System Information</span>
       </div>
-      <div className="flex-shrink-0 px-[6px] py-[1px]">
+      <div className="flex-1 min-h-0 px-[6px] py-[1px] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
         <div className={row2}>
           <div><label className={lbl}>Employee Account Status</label><input readOnly className={`${inp} bg-gray-50`} /></div>
           <div><label className={lbl}>As Date of</label><input readOnly className={`${inp} bg-gray-50`} /></div>
@@ -23,6 +23,6 @@ export default function SystemInfoPanel() {
           <div className="col-span-2"><label className={lbl}>Written By</label><input readOnly className={`${inp} bg-gray-50`} /></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

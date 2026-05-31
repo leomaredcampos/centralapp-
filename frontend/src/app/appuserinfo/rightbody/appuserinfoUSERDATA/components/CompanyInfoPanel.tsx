@@ -32,14 +32,14 @@ export default function CompanyInfoPanel({ form, onChange }: Props) {
         <div className={row2}>
           <div>
             <label className={lbl}>Company Main Logo</label>
-            <label className="flex items-center gap-[3px] border-[0.25px] border-black p-[1px] cursor-pointer w-full">
+            <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
               <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10px,0.78vw,16px)]">Choose file</span>
               <input type="file" name="companymainlogo" accept=".ico" className="hidden" />
             </label>
           </div>
           <div>
             <label className={lbl}>Company Login Logo</label>
-            <label className="flex items-center gap-[3px] border-[0.25px] border-black p-[1px] cursor-pointer w-full">
+            <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
               <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10px,0.78vw,16px)]">Choose file</span>
               <input type="file" name="companyloginlogo" accept=".png" className="hidden" />
             </label>
