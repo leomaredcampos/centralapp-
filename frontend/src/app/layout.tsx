@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Viewport } from "next";
 import "./globals.css";
 import RegisterSW from "./register-sw";
+import PreventZoom from "./prevent-zoom";
 
 export const metadata: Metadata = {
   title: "CentralApp",
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif", fontSize: "clamp(8px, min(0.78vw, 1.2vh), 14px)" }}>
         <RegisterSW />
+        <PreventZoom />
         {children}
       </body>
     </html>
