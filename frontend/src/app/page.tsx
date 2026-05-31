@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-[#f5f5f5]">
-      <p className="text-[11pt] text-[#333]">Loading...</p>
+      <p className="text-[11pt] text-black">Loading...</p>
     </div>
   );
 }

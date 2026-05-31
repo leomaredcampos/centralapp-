@@ -17,7 +17,7 @@ interface Props {
   userInfoRef?: React.RefObject<UserInfoHandle | null>;
 }
 
-const btnClass = "px-[8px] py-[1px] bg-white border border-gray-300 cursor-pointer hover:bg-gray-50";
+const btnClass = "px-[8px] py-[1px] bg-white border border-black 300 cursor-pointer hover:bg-gray-50";
 
 export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, searchList = [], searchVal = "", onSearchChange, onPrev, onNext, userInfoRef }: Props) {
   const isUserInfo = activeApp === "userinfoapp";
@@ -32,9 +32,9 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
-    <div className="h-[7%] border border-gray-300 flex flex-col">
+    <div className="h-[7%] border border-black 300 flex flex-col">
       {/* Row 1 */}
-      <div className="flex-1 flex items-center px-[10px] gap-[8px] border-b border-gray-200">
+      <div className="flex-1 flex items-center px-[10px] gap-[8px] border-b border-black 200">
         <span>{show2FA ? "2FA" : isUserInfo ? "Employee Information App" : "Module"}</span>
         {isUserInfo && !show2FA && (
           <>
@@ -42,7 +42,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
               Choose File
               <input type="file" multiple accept="*" onChange={(e) => userInfoRef?.current?.setFiles(e.target.files)} className="hidden" />
             </label>
-            <span className="text-gray-500">{files && files.length > 0 ? `${files.length} file(s)` : "No file"}</span>
+            <span className="text-black 500">{files && files.length > 0 ? `${files.length} file(s)` : "No file"}</span>
             <button className={btnClass}>Upload</button>
             <button onClick={() => userInfoRef?.current?.handleSave()} disabled={userInfoRef?.current?.loading} className={`${btnClass} disabled:opacity-50`}>Save</button>
           </>
@@ -54,7 +54,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
             </button>
           )}
           {(isUserInfo || show2FA) && (
-            <button onClick={onBack} className="text-gray-600 bg-transparent border-none cursor-pointer hover:underline">
+            <button onClick={onBack} className="text-black 600 bg-transparent border-none cursor-pointer hover:underline">
               ← Back
             </button>
           )}

@@ -2,12 +2,12 @@
 
 import { useRef, useState, useEffect } from "react";
 
-const inp = "w-full text-[clamp(8px,0.78vw,16px)] p-[1px] border border-gray-300 outline-none";
-const lbl = "text-[clamp(8px,0.78vw,16px)] text-gray-500";
+const inp = "w-full text-[clamp(8px,0.78vw,16px)] p-[1px] border border-black 300 outline-none";
+const lbl = "text-[clamp(8px,0.78vw,16px)] text-black 500";
 const req = <span className="text-red-500">*</span>;
 const row4 = "grid grid-cols-4 gap-[4px] mb-[4px]";
 const row2 = "grid grid-cols-2 gap-[4px] mb-[4px]";
-const btnClass = "text-[clamp(8px,0.78vw,16px)] px-[12px] py-[1px] bg-white border border-gray-300 cursor-pointer hover:bg-gray-50";
+const btnClass = "text-[clamp(8px,0.78vw,16px)] px-[12px] py-[1px] bg-white border border-black 300 cursor-pointer hover:bg-gray-50";
 
 interface Props {
   form: Record<string, string>;
@@ -40,19 +40,19 @@ export default function UserInfoForm({ form, onChange, onSave, loading, files, s
   const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
-    <div className="h-full flex flex-col border border-gray-200 rounded-lg shadow-sm bg-white overflow-hidden">
+    <div className="h-full flex flex-col border border-black 200 rounded-lg shadow-sm bg-white overflow-hidden">
 
       {/* Frozen Header */}
-      <div className="flex-shrink-0 px-[10px] py-[3px] border-b border-gray-200 bg-gray-50 flex flex-wrap items-center gap-[6px]">
-        <span className="text-gray-600">Employee Information</span>
+      <div className="flex-shrink-0 px-[10px] py-[3px] border-b border-black 200 bg-gray-50 flex flex-wrap items-center gap-[6px]">
+        <span className="text-black 600">Employee Information</span>
         <label className="text-blue-600 border-b border-blue-600 cursor-pointer">
             Choose File
             <input type="file" multiple accept="*" onChange={(e) => setFiles(e.target.files)} className="hidden" />
           </label>
-          <span className="text-gray-500">
+          <span className="text-black 500">
             {files && files.length > 0 ? `${files.length} file(s) attached` : "No file chosen"}
           </span>
-          <span className="text-gray-600">Module Access</span>
+          <span className="text-black 600">Module Access</span>
           <div ref={moduleRef} className="relative flex-1 min-w-[100px]">
               <input
                 type="text"
@@ -60,11 +60,11 @@ export default function UserInfoForm({ form, onChange, onSave, loading, files, s
                 onChange={(e) => setModuleSearch(e.target.value)}
                 onFocus={() => { setShowModuleDropdown(true); setModuleSearch(""); }}
                 placeholder="Select modules..."
-                className="w-full p-[1px] border border-gray-300 outline-none"
+                className="w-full p-[1px] border border-black 300 outline-none"
               />
               {showModuleDropdown && (
-                <div className="absolute z-10 bg-white border border-gray-300 w-full max-h-[150px] overflow-y-auto" style={{ top: "100%" }}>
-                  {filteredApps.length === 0 && <div className="text-gray-400 px-[6px] py-[2px]">No apps available</div>}
+                <div className="absolute z-10 bg-white border border-black 300 w-full max-h-[150px] overflow-y-auto" style={{ top: "100%" }}>
+                  {filteredApps.length === 0 && <div className="text-black 400 px-[6px] py-[2px]">No apps available</div>}
                   {filteredApps.map((app) => (
                     <label key={app.appname} className="flex items-center gap-[6px] px-[6px] py-[2px] hover:bg-gray-50 cursor-pointer">
                       <input type="checkbox" checked={selectedApps.includes(app.appname)} onChange={() => toggleApp(app.appname)} />
@@ -116,8 +116,8 @@ export default function UserInfoForm({ form, onChange, onSave, loading, files, s
             <div><label className={lbl}>Address {req}</label><input name="useraddress" value={form.useraddress} onChange={onChange} className={inp} /></div>
             <div><label className={lbl}>Employee Email Address {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
           </div>
-          <div className="border-b border-gray-200 pb-[2px] mb-[4px]">
-            <span className="text-[clamp(8px,0.78vw,16px)] text-gray-600">Company Information</span>
+          <div className="border-b border-black 200 pb-[2px] mb-[4px]">
+            <span className="text-[clamp(8px,0.78vw,16px)] text-black 600">Company Information</span>
           </div>
         </div>
 

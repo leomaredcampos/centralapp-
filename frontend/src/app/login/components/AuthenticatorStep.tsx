@@ -31,7 +31,7 @@ export default function AuthenticatorStep({ onSubmit }: Props) {
 
   return (
     <>
-      <p className="text-[11pt] text-center text-[#333] mt-[5px] mb-[5px]">Authenticator</p>
+      <p className="text-[11pt] text-center text-black mt-[5px] mb-[5px]">Authenticator</p>
       <input
         type="text"
         value={code}
@@ -41,9 +41,9 @@ export default function AuthenticatorStep({ onSubmit }: Props) {
         placeholder="Enter Code"
         disabled={loading || countdown > 0}
         autoFocus
-        className="w-[350px] text-[9pt] p-[2px] border border-[#333] outline-none text-center tracking-[4px] disabled:opacity-50"
+        className="w-[350px] text-[9pt] p-[2px] border border-black outline-none text-center tracking-[4px] disabled:opacity-50"
       />
-      <p className="text-[9pt] text-center text-[#333] mt-[2px] mb-0">Authenticator Code</p>
+      <p className="text-[9pt] text-center text-black mt-[2px] mb-0">Authenticator Code</p>
       {countdown > 0 ? (
         <p className="text-[9pt] text-center text-red-500 mt-[6px]">
           Too many attempts. Please wait {countdown}s.
@@ -52,7 +52,7 @@ export default function AuthenticatorStep({ onSubmit }: Props) {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer mt-[15px] hover:bg-[#f0f0f0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-black border-l-0 border-r-0 cursor-pointer mt-[15px] hover:bg-[#f0f0f0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Verify
         </button>

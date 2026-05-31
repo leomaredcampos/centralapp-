@@ -33,7 +33,7 @@ export default function TwoFactorPage() {
   if (checking) {
     return (
       <div className="flex items-center justify-center h-full">
-        <p className="text-[10.5pt] text-[#333]">Loading...</p>
+        <p className="text-[10.5pt] text-black">Loading...</p>
       </div>
     );
   }

@@ -11,10 +11,10 @@ interface Props {
 }
 
 export default function LeftLower({ count, onSearch, activeApp, onBack, onUserInfoData, onPayroll, onAccessControl }: Props) {
-  const btnClass = "w-full p-[2px] leading-none bg-transparent border-t-0 border-b border-[#333] border-l-0 border-r-0 cursor-pointer text-[#333] hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium";
+  const btnClass = "w-full p-[2px] leading-none bg-transparent border-t-0 border-b border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium";
 
   return (
-    <div className="h-[93%] border border-gray-300 flex flex-col p-[20px] gap-[10px]">
+    <div className="h-[93%] border border-black 300 flex flex-col p-[20px] gap-[10px]">
       {activeApp ? (
         <>
           <button onClick={onUserInfoData} className={btnClass}>User Info Data</button>
@@ -27,9 +27,9 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
             type="text"
             placeholder="Search Module..."
             onChange={(e) => onSearch(e.target.value)}
-            className="w-full p-[6px] border border-gray-300 outline-none rounded"
+            className="w-full p-[6px] border border-black 300 outline-none rounded"
           />
-          <div className="text-center text-gray-500 bg-gray-100 rounded p-[6px]">
+          <div className="text-center text-black 500 bg-gray-100 rounded p-[6px]">
             {count} module(s) available
           </div>
         </>

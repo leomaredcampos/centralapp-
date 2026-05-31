@@ -6,7 +6,7 @@ interface Props {
 export default function EnabledView({ onDisable, loading }: Props) {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-[10px]">
-      <p className="text-[10.5pt] text-[#333]">2FA is enabled.</p>
+      <p className="text-[10.5pt] text-black">2FA is enabled.</p>
       <button
         onClick={onDisable}
         disabled={loading}

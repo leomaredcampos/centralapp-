@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export default function LeftUpper() {
   return (
-    <div className="h-[7%] border border-gray-300 flex flex-col">
-      <div className="flex-1 flex items-center justify-center px-[10px] border-b border-gray-200">
+    <div className="h-[7%] border border-black 300 flex flex-col">
+      <div className="flex-1 flex items-center justify-center px-[10px] border-b border-black 200">
         <Image
           src="/api/company-logo?type=login&id=1"
           alt="Logo"
