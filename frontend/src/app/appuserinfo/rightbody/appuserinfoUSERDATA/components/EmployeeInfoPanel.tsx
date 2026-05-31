@@ -16,7 +16,7 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
       <div className="flex-shrink-0 px-[clamp(4px,0.44vw,8px)] py-[clamp(1px,0.07vw,2px)] border-b border-gray-200 bg-gray-50">
         <span className="text-gray-600 text-[clamp(8px,0.78vw,16px)]">Employee Information</span>
       </div>
-      <div className="flex-1 px-[clamp(4px,0.44vw,8px)] py-[clamp(1px,0.07vw,2px)] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
+      <div className="flex-1 min-h-0 px-[clamp(4px,0.44vw,8px)] py-[clamp(1px,0.07vw,2px)] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
         <div className={row3}>
           <div><label className={lbl}>Firstname {req}</label><input name="fname" value={form.fname} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Lastname {req}</label><input name="lname" value={form.lname} onChange={onChange} className={inp} /></div>
