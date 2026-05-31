@@ -6,14 +6,12 @@ import (
 	"centralapp/backend/centralizeaudit"
 	"centralapp/backend/companyfile"
 	"centralapp/backend/credential"
-	"centralapp/backend/redisconnection"
 	"centralapp/backend/userinfouserdata"
 	"centralapp/backend/utils"
 )
 
 func Group0001() {
 	utils.ConnectDB()
-	redisconnection.RegisterRoutes()
 	utils.RegisterRoutes()
 	credential.RegisterRoutes()
 	centralizeaudit.RegisterRoutes()
