@@ -1,89 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import EnabledView from "./components/EnabledView";
+import DisabledView from "./components/DisabledView";
+import SetupView from "./components/SetupView";
+import { useTOTPStatus } from "./hooks/useTOTPStatus";
+import { useTOTPSetup } from "./hooks/useTOTPSetup";
+import { useTOTPActions } from "./hooks/useTOTPActions";
 
 export default function TwoFactorPage() {
-  const [qr, setQr] = useState("");
-  const [code, setCode] = useState("");
-  const [secret, setSecret] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [checking, setChecking] = useState(true);
+  const { isEnabled, checking, setIsEnabled } = useTOTPStatus();
+  const { qr, code, setCode, loading: setupLoading, handleSetup, handleVerify, reset } = useTOTPSetup();
+  const { loading: actionLoading, handleDisable } = useTOTPActions();
 
-  useEffect(() => {
-    checkTOTPStatus();
-  }, []);
-
-  async function checkTOTPStatus() {
-    const email = localStorage.getItem("email");
-    if (!email) return;
-    setChecking(true);
-    // This part of code calling the backend → /backend/credential/totp.go → HandleCheckTOTPStatus
-    const res = await fetch("/api/check-totp-status", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    setChecking(false);
-    setIsEnabled(data.enabled);
-  }
-
-  async function handleSetup() {
-    const email = localStorage.getItem("email");
-    if (!email) return;
-    setLoading(true);
-    // This part of code calling the backend → /backend/credential/totp.go → HandleSetupTOTP
-    const res = await fetch("/api/setup-totp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (data.uri) {
-      setQr(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.uri)}`);
-      setSecret(data.secret);
-    }
-  }
-
-  async function handleVerify() {
-    const email = localStorage.getItem("email");
-    if (!email || !code) return;
-    setLoading(true);
-    // This part of code calling the backend → /backend/credential/totp.go → HandleVerifyTOTPSetup
-    const res = await fetch("/api/verify-totp-setup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, code, secret }),
-    });
-    const data = await res.json();
-    setLoading(false);
+  async function onVerify() {
+    const data = await handleVerify();
     if (data.status === "verified") {
       setIsEnabled(true);
-      setQr("");
-      setCode("");
+      reset();
     } else {
       alert("Invalid code");
     }
   }
 
-  async function handleDisable() {
-    const email = localStorage.getItem("email");
-    if (!email) return;
-    setLoading(true);
-    // This part of code calling the backend → /backend/credential/totp.go → HandleDisableTOTP
-    const res = await fetch("/api/disable-totp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    setLoading(false);
+  async function onDisable() {
+    const data = await handleDisable();
     if (data.status === "disabled") {
       setIsEnabled(false);
-      setQr("");
-      setCode("");
+      reset();
     }
   }
 
@@ -96,58 +39,12 @@ export default function TwoFactorPage() {
   }
 
   if (isEnabled) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full gap-[10px]">
-        <p className="text-[10.5pt] text-[#333]">2FA is enabled.</p>
-        <button
-          onClick={handleDisable}
-          disabled={loading}
-          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Disable
-        </button>
-      </div>
-    );
+    return <EnabledView onDisable={onDisable} loading={actionLoading} />;
   }
 
   if (!qr) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full gap-[10px]">
-        <p className="text-[10.5pt] text-[#333]">2FA is not enabled.</p>
-        <button
-          onClick={handleSetup}
-          disabled={loading}
-          className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors disabled:opacity-50"
-        >
-          Setup 2FA
-        </button>
-      </div>
-    );
+    return <DisabledView onSetup={handleSetup} loading={setupLoading} />;
   }
 
-  return (
-    <div className="flex flex-col items-center justify-center h-full gap-[10px]">
-      <p className="text-[10.5pt] text-[#333]">Scan this QR code using Microsoft Authenticator</p>
-      {qr && <img src={qr} alt="QR Code" width={200} height={200} />}
-      <input
-        type="text"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && !loading && handleVerify()}
-        maxLength={6}
-        placeholder="Enter Code"
-        disabled={loading}
-        autoFocus
-        className="w-[350px] text-[9pt] p-[2px] border border-[#333] outline-none text-center tracking-[4px] disabled:opacity-50"
-      />
-      <p className="text-[9pt] text-center text-[#333] mt-[2px] mb-0">Authenticator Code</p>
-      <button
-        onClick={handleVerify}
-        disabled={loading}
-        className="w-[350px] text-[9pt] p-[2px] leading-none bg-white border-t border-b border-[#333] border-l-0 border-r-0 cursor-pointer hover:bg-[#f0f0f0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        Verify
-      </button>
-    </div>
-  );
+  return <SetupView qr={qr} code={code} setCode={setCode} onVerify={onVerify} loading={setupLoading} />;
 }

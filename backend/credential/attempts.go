@@ -14,7 +14,7 @@ const (
 	otpExpiry    = 5 * time.Minute
 )
 
-func isLocked(key string) (bool, int) {
+func IsLocked(key string) (bool, int) {
 	var count int
 	var lockedAt sql.NullTime
 	err := utils.DB.QueryRow("SELECT count, locked_at FROM login_attempts WHERE keyx=$1", key).Scan(&count, &lockedAt)
@@ -26,13 +26,12 @@ func isLocked(key string) (bool, int) {
 		if remaining > 0 {
 			return true, remaining
 		}
-		// Lock expired, reset
 		utils.DB.Exec("DELETE FROM login_attempts WHERE keyx=$1", key)
 	}
 	return false, 0
 }
 
-func recordAttempt(key string) (bool, int) {
+func RecordAttempt(key string) (bool, int) {
 	_, err := utils.DB.Exec(`
 		INSERT INTO login_attempts (keyx, count, locked_at)
 		VALUES ($1, 1, NULL)
@@ -53,11 +52,11 @@ func recordAttempt(key string) (bool, int) {
 	return false, 0
 }
 
-func resetAttempts(key string) {
+func ResetAttempts(key string) {
 	utils.DB.Exec("DELETE FROM login_attempts WHERE keyx=$1", key)
 }
 
-func setOTPSentAt(email string) {
+func SetOTPSentAt(email string) {
 	utils.DB.Exec(`
 		INSERT INTO login_attempts (keyx, otp_sent_at)
 		VALUES ($1, $2)
@@ -65,7 +64,7 @@ func setOTPSentAt(email string) {
 	`, email, time.Now())
 }
 
-func isOTPExpired(email string) bool {
+func IsOTPExpired(email string) bool {
 	var otpSentAt sql.NullTime
 	err := utils.DB.QueryRow("SELECT otp_sent_at FROM login_attempts WHERE keyx=$1", email).Scan(&otpSentAt)
 	if err != nil || !otpSentAt.Valid {
@@ -74,7 +73,7 @@ func isOTPExpired(email string) bool {
 	return time.Since(otpSentAt.Time) > otpExpiry
 }
 
-func otpSecondsRemaining(email string) int {
+func OTPSecondsRemaining(email string) int {
 	var otpSentAt sql.NullTime
 	err := utils.DB.QueryRow("SELECT otp_sent_at FROM login_attempts WHERE keyx=$1", email).Scan(&otpSentAt)
 	if err != nil || !otpSentAt.Valid {

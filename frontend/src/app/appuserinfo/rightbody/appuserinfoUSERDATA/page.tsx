@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 import UserInfoDataGrid from "./components/UserInfoDataGrid";
 import EmployeeInfoPanel from "./components/EmployeeInfoPanel";
 import CompanyInfoPanel from "./components/CompanyInfoPanel";
 import SystemInfoPanel from "./components/SystemInfoPanel";
+import { useUserInfoData } from "./hooks/useUserInfoData";
+import { useUserInfoActions } from "./hooks/useUserInfoActions";
+import { useAppAccess } from "./hooks/useAppAccess";
 
 export interface UserInfoHandle {
   getFiles: () => FileList | null;
@@ -30,56 +33,14 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
     companyaddress: "", companyemail1: "", companyemail2: "", companysite: "",
     companymainlogo: "", companyloginlogo: "",
   });
-  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<FileList | null>(null);
-  const [appList, setAppList] = useState<{ appname: string; buttonname: string }[]>([]);
-  const [selectedApps, setSelectedApps] = useState<string[]>([]);
-  const [users, setUsers] = useState<{ emailx: string; fname: string; lname: string; writemade: string; datemade: string; expirationdate: string; writeremail: string }[]>([]);
-  const [searchIndex, setSearchIndex] = useState(0);
 
-  useEffect(() => {
-    fetch("/api/get-available-apps", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) })
-      .then((r) => r.json()).then((d) => setAppList(Array.isArray(d) ? d : []));
-    fetch("/api/appuserinfo/list", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) })
-      .then((r) => r.json()).then((d) => setUsers(Array.isArray(d) ? d : []));
-  }, []);
-
-  function toggleApp(appname: string) {
-    setSelectedApps((prev) => prev.includes(appname) ? prev.filter((a) => a !== appname) : [...prev, appname]);
-  }
-
-  function handlePrev() {
-    if (users.length === 0) return;
-    setSearchIndex((searchIndex - 1 + users.length) % users.length);
-  }
-
-  function handleNext() {
-    if (users.length === 0) return;
-    setSearchIndex((searchIndex + 1) % users.length);
-  }
+  const { users, handlePrev, handleNext } = useUserInfoData();
+  const { appList, selectedApps, toggleApp } = useAppAccess();
+  const { loading, handleSave } = useUserInfoActions(form, selectedApps, files);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  async function handleSave() {
-    setLoading(true);
-    const writeremail = localStorage.getItem("email") || "";
-    const res = await fetch("/api/appuserinfo/save", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, writeremail, selectedApps }),
-    });
-    const data = await res.json();
-    if (data.status !== "saved") { setLoading(false); alert(data.error || "Failed to save."); return; }
-    if (files && files.length > 0) {
-      const fd = new FormData();
-      fd.append("email", form.emailx);
-      for (let i = 0; i < Math.min(files.length, 4); i++) fd.append("files", files[i]);
-      await fetch("/api/appuserinfo/upload", { method: "POST", body: fd });
-    }
-    setLoading(false);
-    alert("User saved successfully.");
   }
 
   useImperativeHandle(ref, () => ({
