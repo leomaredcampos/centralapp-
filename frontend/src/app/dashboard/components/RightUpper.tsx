@@ -32,7 +32,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
-    <div className="h-[7%] border-[0.25px] border-black flex flex-col">
+    <div className="h-[7%] flex flex-col">
       {/* Row 1 */}
       <div className="flex-1 flex items-center px-[10px] gap-[8px]">
         <span>{show2FA ? "2FA" : isUserInfo ? "Employee Information App" : "Module"}</span>

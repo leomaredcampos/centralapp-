@@ -29,7 +29,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
 
   return (
     <div className="flex flex-col rounded-lg shadow-sm bg-white" style={{ height: "100%", overflow: "hidden" }}>
-      <div className="flex-shrink-0 px-[6px] py-[2px] bg-gray-50 flex flex-wrap items-center gap-[4px]">
+      <div className="flex-shrink-0 px-[6px] py-[2px] border-b-[0.25px] border-black bg-gray-50 flex flex-wrap items-center gap-[4px]">
         <input placeholder="Type to search..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "25.5%" }} />
         <span className="text-black">Search</span>
         <button onClick={onPrev} className={btnClass}>Prev</button>
@@ -41,7 +41,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
       <div style={{ flex: 1, overflow: "auto", scrollbarWidth: "thin", scrollbarColor: "#d1d5db transparent", position: "relative" }}>
         <table style={{ borderCollapse: "collapse", tableLayout: "fixed", width: "100%" }}>
           <thead className="sticky top-0 bg-gray-50 z-10">
-            <tr>
+            <tr className="border-b-[0.25px] border-black">
               <th className="px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "2.2%", position: "sticky", left: 0, zIndex: 20 }}>
                 <input type="checkbox" />
               </th>
@@ -54,7 +54,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
           </thead>
           <tbody>
             {users.map((u, i) => (
-              <tr key={i} className="hover:bg-gray-50 cursor-pointer">
+              <tr key={i} className="border-b-[0.25px] border-black hover:bg-gray-50 cursor-pointer">
                 <td className="px-[6px] py-[2px] text-center bg-white" style={{ position: "sticky", left: 0, zIndex: 10, width: "2.2%" }}>
                   <input type="checkbox" checked={selectedRows.includes(u.emailx)} onChange={() => toggleRow(u.emailx)} />
                 </td>
