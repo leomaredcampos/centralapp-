@@ -27,12 +27,14 @@ export default function DashboardPage() {
 
   return (
     <div className="flex w-screen h-screen">
-      <div className="flex flex-col w-[15%] h-full border-[0.25px] border-black">
+      <div className="flex flex-col w-[15%] h-full">
         <LeftUpper />
+        <div className="border-t-[0.25px] border-black" />
         <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
       </div>
-      <div className="flex flex-col w-[85%] h-full border-[0.25px] border-black">
+      <div className="flex flex-col w-[85%] h-full">
         <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
+        <div className="border-t-[0.25px] border-black" />
         <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
       </div>
     </div>
