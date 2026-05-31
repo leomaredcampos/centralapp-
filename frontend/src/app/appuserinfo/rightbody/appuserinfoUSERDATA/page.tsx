@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import UserInfoDataGrid from "./components/UserInfoDataGrid";
 
-const inp = "w-full p-[1px] border border-gray-300 outline-none";
-const lbl = "text-gray-500 leading-none";
+const inp = "w-full p-[1px] border border-gray-300 outline-none text-[clamp(8px,0.78vw,16px)]";
+const lbl = "text-gray-500 leading-none text-[clamp(8px,0.78vw,16px)]";
 const req = <span className="text-red-500">*</span>;
 const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 const row3 = "grid grid-cols-3 gap-[2px] mb-[1px]";
@@ -131,7 +131,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
         {/* Panel 1 — Employee Info */}
         <div className="w-[48%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
           <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
-            <span className="text-gray-600">Employee Information</span>
+            <span className="text-gray-600 text-[clamp(8px,0.78vw,16px)]">Employee Information</span>
           </div>
           <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
             <div className={row3}>
@@ -173,7 +173,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
                 <div>
                   <label className={lbl}>ID Photo {req}</label>
                   <label className="flex items-center gap-[3px] border border-gray-300 p-[1px] cursor-pointer w-full">
-                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap">Choose file</span>
+                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                     <input type="file" name="idphoto" className="hidden" />
                   </label>
                 </div>
@@ -189,14 +189,14 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
                 <div>
                   <label className={lbl}>Signature {req}</label>
                   <label className="flex items-center gap-[3px] border border-gray-300 p-[1px] cursor-pointer w-full">
-                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap">Choose file</span>
+                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                     <input type="file" name="usersign" className="hidden" />
                   </label>
                 </div>
                 <div>
                   <label className={lbl}>Others {req}</label>
                   <label className="flex items-center gap-[3px] border border-gray-300 p-[1px] cursor-pointer w-full">
-                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap">Choose file</span>
+                    <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                     <input type="file" name="requirementsx" multiple className="hidden" />
                   </label>
                 </div>
@@ -214,7 +214,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
         {/* Panel 2 — Company Info */}
         <div className="w-[25.5%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
           <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
-            <span className="text-gray-600">Company Information</span>
+            <span className="text-gray-600 text-[clamp(8px,0.78vw,16px)]">Company Information</span>
           </div>
           <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
             <div className={row2}>
@@ -233,14 +233,14 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
               <div>
                 <label className={lbl}>Company Main Logo</label>
                 <label className="flex items-center gap-[3px] border border-gray-300 p-[1px] cursor-pointer w-full">
-                  <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap">Choose file</span>
+                  <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                   <input type="file" name="companymainlogo" accept=".ico" className="hidden" />
                 </label>
               </div>
               <div>
                 <label className={lbl}>Company Login Logo</label>
                 <label className="flex items-center gap-[3px] border border-gray-300 p-[1px] cursor-pointer w-full">
-                  <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap">Choose file</span>
+                  <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(8px,0.78vw,16px)]">Choose file</span>
                   <input type="file" name="companyloginlogo" accept=".png" className="hidden" />
                 </label>
               </div>
@@ -259,7 +259,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
         {/* Panel 3 — System Info + Datagrid */}
         <div className="w-[26.5%] h-full flex flex-col overflow-hidden">
           <div className="flex-shrink-0 px-[6px] py-[1px] border-b border-gray-200 bg-gray-50">
-            <span className="text-gray-600">System Information</span>
+            <span className="text-gray-600 text-[clamp(8px,0.78vw,16px)]">System Information</span>
           </div>
           <div className="flex-shrink-0 px-[6px] py-[1px]">
             <div className={row2}>
