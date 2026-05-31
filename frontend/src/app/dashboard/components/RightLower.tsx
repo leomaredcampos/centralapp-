@@ -43,9 +43,9 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
               <div
                 key={app.appname}
                 onClick={() => onAppClick(app.appname)}
-                className="group flex flex-col items-center justify-center w-[96px] h-[96px] rounded-xl border border-gray-200 bg-white shadow-sm cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-md"
+                className="group flex flex-col items-center justify-center w-[11%] aspect-square rounded-xl border border-gray-200 bg-white shadow-sm cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-md"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" className="transition-all duration-200 group-hover:w-[44px] group-hover:h-[44px]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="37.5%" height="37.5%" viewBox="0 0 36 36" className="transition-all duration-200 group-hover:w-[45.8%] group-hover:h-[45.8%]">
                   <path d="M2 10a4 4 0 0 1 4-4h6l3 3h13a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V10z" fill="#FFCA28"/>
                   <path d="M2 14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-9z" fill="#FFD54F"/>
                 </svg>
