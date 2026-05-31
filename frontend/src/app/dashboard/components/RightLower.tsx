@@ -34,7 +34,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
   return (
     <div className="h-[93%] border-[0.25px] border-black overflow-y-auto p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="w-[75%] h-full flex flex-col rounded-lg border-[0.25px] border-black shadow-sm bg-white">
-        <div className="px-[20px] py-[12px] border-b-[0.25px] border-black">
+        <div className="px-[20px] py-[12px]">
           <span className="text-[clamp(11px,1.07vw,22px)] text-black">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
         </div>
         <div className="p-[20px] overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>

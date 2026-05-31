@@ -34,7 +34,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   return (
     <div className="h-[7%] border-[0.25px] border-black flex flex-col">
       {/* Row 1 */}
-      <div className="flex-1 flex items-center px-[10px] gap-[8px] border-b-[0.25px] border-black">
+      <div className="flex-1 flex items-center px-[10px] gap-[8px]">
         <span>{show2FA ? "2FA" : isUserInfo ? "Employee Information App" : "Module"}</span>
         {isUserInfo && !show2FA && (
           <>

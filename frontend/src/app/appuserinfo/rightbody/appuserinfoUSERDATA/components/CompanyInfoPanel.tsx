@@ -13,7 +13,7 @@ interface Props {
 export default function CompanyInfoPanel({ form, onChange }: Props) {
   return (
     <>
-      <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
+      <div className="flex-shrink-0 px-[6px] py-[1px] bg-gray-50">
         <span className="text-black text-[clamp(8px,0.78vw,16px)]">Company Information</span>
       </div>
       <div className="flex-1 px-[6px] py-[1px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>

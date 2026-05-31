@@ -14,7 +14,7 @@ interface Props {
 export default function EmployeeInfoPanel({ form, onChange }: Props) {
   return (
     <div className="w-full min-w-0 h-full flex flex-col overflow-hidden">
-      <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
+      <div className="flex-shrink-0 px-[6px] py-[1px] bg-gray-50">
         <span className="text-black text-[clamp(8px,0.78vw,16px)]">Employee Information</span>
       </div>
       <div className="flex-1 min-h-0 px-[6px] py-[1px] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
