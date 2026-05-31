@@ -35,7 +35,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
     <div className="h-[93%] border border-gray-300 overflow-y-auto p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="w-[75%] h-full flex flex-col rounded-lg border border-gray-200 shadow-sm bg-white">
         <div className="px-[20px] py-[12px] border-b border-gray-200">
-          <span className="text-[11pt] text-gray-500">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
+          <span className="text-[clamp(11px,1.07vw,22px)] text-gray-500">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
         </div>
         <div className="p-[20px] overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>
           <div className="flex flex-wrap gap-[10px] pr-[10px]">
@@ -49,13 +49,13 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
                   <path d="M2 10a4 4 0 0 1 4-4h6l3 3h13a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V10z" fill="#FFCA28"/>
                   <path d="M2 14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-9z" fill="#FFD54F"/>
                 </svg>
-                <span className="text-[11pt] text-center text-gray-600 transition-all duration-200 mt-[4px] px-[4px] leading-tight">
+                <span className="text-[clamp(11px,1.07vw,22px)] text-center text-gray-600 transition-all duration-200 mt-[4px] px-[4px] leading-tight">
                   {app.buttonname}
                 </span>
               </div>
             ))}
             {apps.length === 0 && (
-              <p className="text-[11pt] text-gray-400 col-span-5">No modules available.</p>
+              <p className="text-[clamp(11px,1.07vw,22px)] text-gray-400 col-span-5">No modules available.</p>
             )}
           </div>
         </div>

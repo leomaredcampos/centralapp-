@@ -58,7 +58,7 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
           localStorage.removeItem("authtype");
           window.location.href = "/login";
         }}
-        className="w-full text-[9pt] p-[2px] leading-none bg-transparent border-t-0 border-b border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors"
+        className="w-full text-[clamp(9px,0.88vw,18px)] p-[2px] leading-none bg-transparent border-t-0 border-b border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors"
       >
         Logout
       </button>
