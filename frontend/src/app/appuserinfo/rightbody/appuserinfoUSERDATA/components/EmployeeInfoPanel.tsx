@@ -1,8 +1,9 @@
 "use client";
 
 const lbl = "text-gray-500 leading-none text-[clamp(7px,0.68vw,12px)]";
-const inp = "w-full border border-gray-300 outline-none text-[clamp(7px,0.68vw,12px)] p-[0px]";
+const inp = "w-full p-[0px] border border-gray-300 outline-none text-[clamp(7px,0.68vw,12px)]";
 const req = <span className="text-red-500">*</span>;
+const row2 = "grid grid-cols-2 gap-[1px] mb-[0px]";
 const row3 = "grid grid-cols-3 gap-[1px] mb-[0px]";
 
 interface Props {
@@ -51,38 +52,46 @@ export default function EmployeeInfoPanel({ form, onChange }: Props) {
         <div className={row3}>
           <div><label className={lbl}>Emergency Contact {req}</label><input name="usercontactinemergency" value={form.usercontactinemergency} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Emergency No. {req}</label><input name="userpersoncontactno" value={form.userpersoncontactno} onChange={onChange} className={inp} /></div>
-          <div><label className={lbl}>Biometric ID</label><input name="userbio" value={form.userbio} onChange={onChange} className={inp} /></div>
+          <div className="grid" style={{ gridTemplateColumns: "59% 40%", gap: "1%" }}>
+            <div><label className={lbl}>Biometric ID</label><input name="userbio" value={form.userbio} onChange={onChange} className={inp} /></div>
+            <div>
+              <label className={lbl}>ID Photo {req}</label>
+              <label className="flex items-center gap-[2px] border border-gray-300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+                <input type="file" name="idphoto" className="hidden" />
+              </label>
+            </div>
+          </div>
         </div>
         <div className={row3}>
           <div><label className={lbl}>Religion</label><input name="userreligion" value={form.userreligion} onChange={onChange} className={inp} /></div>
-          <div><label className={lbl}>Height</label><input name="userheight" value={form.userheight} onChange={onChange} className={inp} /></div>
-          <div><label className={lbl}>Weight</label><input name="userweight" value={form.userweight} onChange={onChange} className={inp} /></div>
-        </div>
-        <div className="grid grid-cols-3 gap-[1px] mb-[0px]">
-          <div>
-            <label className={lbl}>ID Photo {req}</label>
-            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
-              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
-              <input type="file" name="idphoto" className="hidden" />
-            </label>
+          <div className="grid" style={{ gridTemplateColumns: "50% 49%", gap: "1%" }}>
+            <div><label className={lbl}>Height</label><input name="userheight" value={form.userheight} onChange={onChange} className={inp} /></div>
+            <div><label className={lbl}>Weight</label><input name="userweight" value={form.userweight} onChange={onChange} className={inp} /></div>
           </div>
-          <div>
-            <label className={lbl}>Signature {req}</label>
-            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
-              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
-              <input type="file" name="usersign" className="hidden" />
-            </label>
-          </div>
-          <div>
-            <label className={lbl}>Others {req}</label>
-            <label className="flex items-center border border-gray-300 p-[0px] cursor-pointer w-full overflow-hidden">
-              <span className="text-blue-600 border-b border-blue-600 text-[clamp(6px,0.58vw,10px)]">Choose file</span>
-              <input type="file" name="requirementsx" multiple className="hidden" />
-            </label>
+          <div className="grid" style={{ gridTemplateColumns: "59% 40%", gap: "1%" }}>
+            <div>
+              <label className={lbl}>Signature {req}</label>
+              <label className="flex items-center gap-[2px] border border-gray-300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+                <input type="file" name="usersign" className="hidden" />
+              </label>
+            </div>
+            <div>
+              <label className={lbl}>Others {req}</label>
+              <label className="flex items-center gap-[2px] border border-gray-300 p-[0px] cursor-pointer w-full">
+                <span className="text-blue-600 border-b border-blue-600 whitespace-nowrap text-[clamp(6px,0.58vw,10px)]">Choose file</span>
+                <input type="file" name="requirementsx" multiple className="hidden" />
+              </label>
+            </div>
           </div>
         </div>
-        <div className="mb-[0px]"><label className={lbl}>Address {req}</label><input name="useraddress" value={form.useraddress} onChange={onChange} className={inp} /></div>
-        <div className="mb-[0px]"><label className={lbl}>Email {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
+        <div className={row3}>
+          <div className="col-span-3"><label className={lbl}>Employee Complete Address {req}</label><input name="useraddress" value={form.useraddress} onChange={onChange} className={inp} /></div>
+        </div>
+        <div className={row3}>
+          <div className="col-span-3"><label className={lbl}>Employee Email Address {req}</label><input name="emailx" value={form.emailx} onChange={onChange} className={inp} /></div>
+        </div>
       </div>
     </div>
   );
