@@ -56,7 +56,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
   return (
     <div className="h-full flex flex-col border-[0.25px] border-black rounded-lg bg-white overflow-hidden">
       {/* Datagrid */}
-      <div className="overflow-hidden" style={{ flex: "0 0 35%" }}>
+      <div className="overflow-hidden border-b-[0.25px] border-black" style={{ flex: "0 0 35%" }}>
         <UserInfoDataGrid
           users={users}
           onPrev={handlePrev}
