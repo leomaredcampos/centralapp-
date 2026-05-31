@@ -27,7 +27,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex w-screen h-screen">
-      <div className="flex flex-col w-[15%] h-full">
+      <div className="flex flex-col w-[15%] h-full border-r-[0.25px] border-black">
         <LeftUpper />
         <div className="border-t-[0.25px] border-black" />
         <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
