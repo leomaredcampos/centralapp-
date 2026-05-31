@@ -105,13 +105,13 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
       {/* 3-Panel Body */}
       <div className="flex overflow-hidden" style={{ height: "63%" }}>
-        <div className="w-[48%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
+        <div className="w-[48%] min-w-0 h-full flex flex-col border-r border-gray-200 overflow-hidden">
           <EmployeeInfoPanel form={form} onChange={handleChange} />
         </div>
-        <div className="w-[25.5%] h-full flex flex-col border-r border-gray-200 overflow-hidden">
+        <div className="w-[25.5%] min-w-0 h-full flex flex-col border-r border-gray-200 overflow-hidden">
           <CompanyInfoPanel form={form} onChange={handleChange} />
         </div>
-        <div className="w-[26.5%] h-full flex flex-col overflow-hidden">
+        <div className="w-[26.5%] min-w-0 h-full flex flex-col overflow-hidden">
           <SystemInfoPanel />
         </div>
       </div>
