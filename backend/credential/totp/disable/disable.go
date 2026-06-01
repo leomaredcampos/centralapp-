@@ -37,7 +37,7 @@ func HandleDisableTOTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteAllTOTPSessions(email string) {
-	utils.DB.Exec("DELETE FROM totpsessiontbl WHERE emailx=$1", email)
+	utils.DB.Exec("DELETE FROM usertotp_sessions WHERE emailx=$1", email)
 }
 
 func logTOTPDisabled(email string, r *http.Request) {

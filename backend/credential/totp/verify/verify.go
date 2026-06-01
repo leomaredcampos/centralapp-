@@ -72,13 +72,17 @@ func HandleVerifyTOTP(w http.ResponseWriter, r *http.Request) {
 
 func createTOTPSession(email string) (string, error) {
 	var count int
-	utils.DB.QueryRow("SELECT COUNT(*) FROM totpsessiontbl WHERE emailx=$1", email).Scan(&count)
+	utils.DB.QueryRow("SELECT COUNT(*) FROM usertotp_sessions WHERE emailx=$1", email).Scan(&count)
 	if count >= 3 {
-		return "", nil
+		utils.DB.Exec(`
+			DELETE FROM usertotp_sessions
+			WHERE datemade = (SELECT MIN(datemade) FROM usertotp_sessions WHERE emailx=$1)
+			AND emailx=$1
+		`, email)
 	}
 
 	sessionid := utils.GenerateTOTPSecret()
-	_, err := utils.DB.Exec("INSERT INTO totpsessiontbl (emailx, sessionid) VALUES ($1, $2)", email, sessionid)
+	_, err := utils.DB.Exec("INSERT INTO usertotp_sessions (emailx, sessionid, datemade) VALUES ($1, $2, NOW())", email, sessionid)
 	if err != nil {
 		return "", err
 	}
