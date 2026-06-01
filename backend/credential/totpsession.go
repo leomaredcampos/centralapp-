@@ -36,7 +36,7 @@ func HandleCheckTOTPSession(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var count int
-	err := utils.DB.QueryRow("SELECT COUNT(*) FROM totpsessiontbl WHERE emailx=$1 AND sessionid=$2", req.Email, req.SessionID).Scan(&count)
+	err := utils.DB.QueryRow("SELECT COUNT(*) FROM usertotp_sessions WHERE emailx=$1 AND sessionid=$2", req.Email, req.SessionID).Scan(&count)
 	if err != nil || count == 0 {
 		json.NewEncoder(w).Encode(map[string]string{"status": "invalid"})
 		return
@@ -62,20 +62,20 @@ func HandleDeleteTOTPSession(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.DB.Exec("DELETE FROM totpsessiontbl WHERE emailx=$1 AND sessionid=$2", req.Email, req.SessionID)
+	utils.DB.Exec("DELETE FROM usertotp_sessions WHERE emailx=$1 AND sessionid=$2", req.Email, req.SessionID)
 	json.NewEncoder(w).Encode(map[string]string{"status": "deleted"})
 }
 
 func createTOTPSession(email string) (string, error) {
 	// Check max sessions
 	var count int
-	utils.DB.QueryRow("SELECT COUNT(*) FROM totpsessiontbl WHERE emailx=$1", email).Scan(&count)
+	utils.DB.QueryRow("SELECT COUNT(*) FROM usertotp_sessions WHERE emailx=$1", email).Scan(&count)
 	if count >= maxTOTPSessions {
 		// Delete the oldest session to make room
 		_, err := utils.DB.Exec(`
-			DELETE FROM totpsessiontbl 
+			DELETE FROM usertotp_sessions 
 			WHERE datemade = (
-				SELECT MIN(datemade) FROM totpsessiontbl 
+				SELECT MIN(datemade) FROM usertotp_sessions 
 				WHERE emailx=$1
 			)
 			AND emailx = $1
@@ -86,7 +86,7 @@ func createTOTPSession(email string) (string, error) {
 	}
 
 	sessionid := generateSessionID()
-	_, err := utils.DB.Exec("INSERT INTO totpsessiontbl (emailx, sessionid, datemade) VALUES ($1, $2, $3)", email, sessionid, time.Now())
+	_, err := utils.DB.Exec("INSERT INTO usertotp_sessions (emailx, sessionid, datemade) VALUES ($1, $2, $3)", email, sessionid, time.Now())
 	if err != nil {
 		return "", err
 	}
@@ -94,5 +94,5 @@ func createTOTPSession(email string) (string, error) {
 }
 
 func deleteAllTOTPSessions(email string) {
-	utils.DB.Exec("DELETE FROM totpsessiontbl WHERE emailx=$1", email)
+	utils.DB.Exec("DELETE FROM usertotp_sessions WHERE emailx=$1", email)
 }

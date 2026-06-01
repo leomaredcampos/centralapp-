@@ -34,7 +34,7 @@ func expireTOTPSessions() {
 		return
 	}
 	utils.DB.Exec(`
-		DELETE FROM totpsessiontbl
+		DELETE FROM usertotp_sessions
 		WHERE datemade < NOW() - INTERVAL '1 day'
 	`)
 }
