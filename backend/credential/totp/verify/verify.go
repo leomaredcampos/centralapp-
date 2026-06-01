@@ -74,11 +74,19 @@ func createTOTPSession(email string) (string, error) {
 	var count int
 	utils.DB.QueryRow("SELECT COUNT(*) FROM totpsessiontbl WHERE emailx=$1", email).Scan(&count)
 	if count >= 3 {
-		return "", nil
+		_, err := utils.DB.Exec(`
+			DELETE FROM totpsessiontbl
+			WHERE id = (
+				SELECT MIN(id) FROM totpsessiontbl WHERE emailx=$1
+			)
+		`, email)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	sessionid := utils.GenerateTOTPSecret()
-	_, err := utils.DB.Exec("INSERT INTO totpsessiontbl (emailx, sessionid) VALUES ($1, $2)", email, sessionid)
+	_, err := utils.DB.Exec("INSERT INTO totpsessiontbl (emailx, sessionid, datemade) VALUES ($1, $2, NOW())", email, sessionid)
 	if err != nil {
 		return "", err
 	}
