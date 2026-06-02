@@ -42,14 +42,8 @@ body {
   font-family: inherit;
 }
 
-@media (orientation: landscape) {
-  body {
-    font-size: min(0.78vw, 1.2vh);
-  }
-}
-
-@media (orientation: portrait) {
-  body {
-    font-size: 0.78vw;
-  }
+body {
+  font-size: min(1.17vw, 1.709dvh);
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
