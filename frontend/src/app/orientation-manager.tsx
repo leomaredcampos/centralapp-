@@ -8,12 +8,12 @@ export default function OrientationManager() {
       const isPortrait = window.screen.height > window.screen.width;
 
       if (isPortrait) {
-        document.documentElement.style.cssText = "";
+        document.documentElement.style.cssText = "overflow: auto; width: 100%; height: auto;";
         document.body.style.cssText = `
           background: #ffffff;
           color: #000000;
           font-family: Calibri, sans-serif;
-          font-size: 14pt;
+          font-size: min(1.17vw, 1.709dvh);
           -webkit-text-size-adjust: none;
           text-size-adjust: none;
         `;
