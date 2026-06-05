@@ -3,6 +3,7 @@ import type { Viewport } from "next";
 import "./globals.css";
 import RegisterSW from "./register-sw";
 import PreventZoom from "./prevent-zoom";
+import OrientationManager from "./orientation-manager";
 
 export const metadata: Metadata = {
   title: "CentralApp",
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col" style={{ fontFamily: "Calibri, sans-serif" }}>
         <RegisterSW />
         <PreventZoom />
+        <OrientationManager />
         {children}
       </body>
     </html>
