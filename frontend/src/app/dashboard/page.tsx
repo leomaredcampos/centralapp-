@@ -43,8 +43,8 @@ export default function DashboardPage() {
         <div style={{ height: "2.5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <RightUpper {...rightUpperProps} />
         </div>
-        {/* RightLower - remaining space */}
-        <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
+        {/* RightLower - 80vh */}
+        <div style={{ height: "80vh", overflow: "hidden", minHeight: 0 }}>
           <RightLower {...rightLowerProps} leftLowerProps={leftLowerProps} />
         </div>
         {activeApp !== "userinfoapp" && (
