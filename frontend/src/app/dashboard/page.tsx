@@ -43,11 +43,10 @@ export default function DashboardPage() {
           <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
           <div className="border-t-[0.25px] border-black" />
         </div>
-        <div className="flex-1 overflow-hidden min-h-0">
+        <div className="flex-1 md:h-[85%] overflow-hidden min-h-0">
           <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
         </div>
-        {/* Mobile: LeftLower sa pinakababa */}
-        <div className="md:hidden flex-shrink-0 border-t-[0.25px] border-black">
+        <div className="md:hidden h-[5vh] flex-shrink-0 border-t-[0.25px] border-black">
           <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
         </div>
       </div>
