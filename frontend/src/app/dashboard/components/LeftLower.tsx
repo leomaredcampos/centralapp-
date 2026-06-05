@@ -46,7 +46,7 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
           </>
         ) : (
           <>
-            <input type="text" placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ padding: "2px 6px", border: "0.25px solid black", outline: "none", borderRadius: "4px", width: "120px" }} />
+            <input type="text" placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ padding: "2px 6px", border: "0.25px solid black", outline: "none", borderRadius: "4px", width: "40vw" }} />
             <span style={{ color: "black" }}>{count} module(s)</span>
             <button onClick={handleLogout} style={{ background: "transparent", border: "none", borderBottom: "0.25px solid #ff0000", cursor: "pointer", color: "#ff0000", padding: "2px" }}>Logout</button>
           </>
