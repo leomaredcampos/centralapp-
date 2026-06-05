@@ -5,38 +5,38 @@ import { useEffect } from "react";
 export default function OrientationManager() {
   useEffect(() => {
     function apply() {
-      const isMobile = window.screen.width < 1280 && window.screen.height > window.screen.width;
+      const isPortrait = window.screen.height > window.screen.width;
 
-      if (isMobile) {
-        document.body.setAttribute("data-orientation", "portrait");
-        document.documentElement.style.overflow = "auto";
-        document.documentElement.style.height = "auto";
-        document.documentElement.style.width = "100%";
-        document.body.style.overflow = "auto";
-        document.body.style.height = "auto";
-        document.body.style.width = "100%";
-        document.body.style.position = "relative";
-        document.body.style.top = "";
-        document.body.style.left = "";
-
-        let meta = document.querySelector("meta[name=viewport]") as HTMLMetaElement;
-        if (!meta) { meta = document.createElement("meta"); meta.name = "viewport"; document.head.appendChild(meta); }
-        meta.content = "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes";
+      if (isPortrait) {
+        document.documentElement.style.cssText = "";
+        document.body.style.cssText = `
+          background: #ffffff;
+          color: #000000;
+          font-family: Calibri, sans-serif;
+          font-size: 14pt;
+          -webkit-text-size-adjust: none;
+          text-size-adjust: none;
+        `;
+        const meta = document.querySelector("meta[name=viewport]") as HTMLMetaElement;
+        if (meta) meta.content = "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes";
       } else {
-        document.body.setAttribute("data-orientation", "landscape");
-        document.documentElement.style.overflow = "hidden";
-        document.documentElement.style.height = "100dvh";
-        document.documentElement.style.width = "100dvw";
-        document.body.style.overflow = "hidden";
-        document.body.style.height = "100dvh";
-        document.body.style.width = "100dvw";
-        document.body.style.position = "fixed";
-        document.body.style.top = "0";
-        document.body.style.left = "0";
-
-        let meta = document.querySelector("meta[name=viewport]") as HTMLMetaElement;
-        if (!meta) { meta = document.createElement("meta"); meta.name = "viewport"; document.head.appendChild(meta); }
-        meta.content = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+        document.documentElement.style.cssText = "overflow: hidden; width: 100dvw; height: 100dvh;";
+        document.body.style.cssText = `
+          background: #ffffff;
+          color: #000000;
+          font-family: Calibri, sans-serif;
+          font-size: min(1.17vw, 1.709dvh);
+          width: 100dvw;
+          height: 100dvh;
+          overflow: hidden;
+          position: fixed;
+          top: 0;
+          left: 0;
+          -webkit-text-size-adjust: none;
+          text-size-adjust: none;
+        `;
+        const meta = document.querySelector("meta[name=viewport]") as HTMLMetaElement;
+        if (meta) meta.content = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
       }
     }
 

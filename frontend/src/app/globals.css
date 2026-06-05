@@ -33,20 +33,3 @@ body {
   word-break: break-word;
   overflow-wrap: break-word;
 }
-
-@media (orientation: portrait) {
-  html, body {
-    overflow: auto !important;
-    height: auto !important;
-    width: 100% !important;
-    position: static !important;
-    top: auto !important;
-    left: auto !important;
-  }
-  body {
-    font-size: 14pt !important;
-  }
-  body * {
-    font-size: inherit !important;
-  }
-}
