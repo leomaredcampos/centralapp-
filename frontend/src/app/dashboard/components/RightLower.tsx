@@ -25,7 +25,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
   );
   if (activeApp === "userinfoapp") return (
     <div className="h-full p-[10px] flex bg-gradient-to-br from-white via-gray-50 to-gray-100">
-      <div className="flex-1 min-h-0">
+      <div className="flex-1 min-h-0" style={{ height: "100%" }}>
         <AppUserInfoRightBody ref={userInfoRef} />
       </div>
     </div>
