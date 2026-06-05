@@ -43,10 +43,11 @@ export default function DashboardPage() {
             <LeftUpper />
           </div>
         )}
-        <div className="flex-shrink-0" style={isPortrait ? { height: "5vh" } : { height: "5%" }}>
+        {/* RightUpper */}
+        <div className="flex-shrink-0 overflow-hidden" style={isPortrait ? { height: "5vh" } : { height: "5vh" }}>
           <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
-          <div className="border-t-[0.25px] border-black" />
         </div>
+        <div className="border-t-[0.25px] border-black flex-shrink-0" />
         <div className="flex-1 overflow-hidden min-h-0">
           <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
         </div>
