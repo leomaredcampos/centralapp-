@@ -8,6 +8,7 @@ import SystemInfoPanel from "./components/SystemInfoPanel";
 import { useUserInfoData } from "./hooks/useUserInfoData";
 import { useUserInfoActions } from "./hooks/useUserInfoActions";
 import { useAppAccess } from "./hooks/useAppAccess";
+import { useOrientation } from "../../../dashboard/hooks/useOrientation";
 
 export interface UserInfoHandle {
   getFiles: () => FileList | null;
@@ -53,48 +54,50 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
     loading,
   }));
 
-  return (
-    <div className="h-full flex flex-col border-[0.25px] border-black rounded-lg bg-white overflow-hidden">
-      {/* Datagrid */}
-      <div className="overflow-hidden border-b-[0.25px] border-black" style={{ flex: "0 0 35%" }}>
-        <UserInfoDataGrid
-          users={users}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
-      </div>
+  const isPortrait = useOrientation();
 
-      {/* Desktop Layout (Landscape) — 3 Columns Side by Side */}
-      <div className="hidden md:flex overflow-hidden min-w-0" style={{ flex: "0 0 63%" }}>
-        <div className="w-[48%] min-w-0 h-full flex flex-col overflow-hidden">
-          <EmployeeInfoPanel form={form} onChange={handleChange} />
+  // ─── LANDSCAPE LAYOUT ──────────────────────────────────────────────
+  if (!isPortrait) {
+    return (
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", borderRadius: "8px", background: "white" }}>
+        {/* Datagrid - 35% */}
+        <div style={{ height: "35%", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+          <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
         </div>
-        <div className="w-[25.5%] min-w-0 h-full flex flex-col overflow-hidden">
-          <CompanyInfoPanel form={form} onChange={handleChange} />
-        </div>
-        <div className="w-[26.5%] min-w-0 h-full flex flex-col overflow-hidden">
-          <SystemInfoPanel />
-        </div>
-      </div>
-
-      {/* Mobile/Portrait Layout — 3 Frames takes full height, Left Lower sa baba */}
-      <div className="flex md:hidden flex-col overflow-hidden" style={{ flex: "1 1 0%", minHeight: 0 }}>
-        {/* 3 Information Panels — scrollable, fills remaining space */}
-        <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
-          {/* Employee Information Panel */}
-          <div className="w-full border-b-[0.25px] border-black">
+        {/* 3 Columns - 63% */}
+        <div style={{ height: "63%", display: "flex", overflow: "hidden" }}>
+          <div style={{ width: "48%", height: "100%", overflow: "hidden" }}>
             <EmployeeInfoPanel form={form} onChange={handleChange} />
           </div>
-          {/* Company Information Panel (new format) */}
-          <div className="w-full border-b-[0.25px] border-black">
+          <div style={{ width: "25.5%", height: "100%", overflow: "hidden" }}>
             <CompanyInfoPanel form={form} onChange={handleChange} />
           </div>
-          {/* System Information Panel */}
-          <div className="w-full border-b-[0.25px] border-black">
+          <div style={{ width: "26.5%", height: "100%", overflow: "hidden" }}>
             <SystemInfoPanel />
           </div>
         </div>
+      </div>
+    );
+  }
 
+  // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
+  return (
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", borderRadius: "8px", background: "white" }}>
+      {/* Datagrid - 10vh */}
+      <div style={{ height: "10vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+        <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
+      </div>
+      {/* Employee - 35vh */}
+      <div style={{ height: "35vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+        <EmployeeInfoPanel form={form} onChange={handleChange} />
+      </div>
+      {/* Company - 30vh */}
+      <div style={{ height: "30vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+        <CompanyInfoPanel form={form} onChange={handleChange} />
+      </div>
+      {/* System - 15vh */}
+      <div style={{ height: "15vh", flexShrink: 0, overflow: "hidden" }}>
+        <SystemInfoPanel />
       </div>
     </div>
   );
