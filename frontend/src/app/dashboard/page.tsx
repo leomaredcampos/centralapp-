@@ -34,21 +34,21 @@ export default function DashboardPage() {
   // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   if (isPortrait) {
     return (
-      <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        {/* LeftUpper - 2.5vh */}
-        <div style={{ height: "2.5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+      <div style={{ width: "100dvw", height: "100dvh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        {/* LeftUpper - 2.5dvh */}
+        <div style={{ height: "2.5dvh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <LeftUpper />
         </div>
-        {/* RightUpper - 2.5vh */}
-        <div style={{ height: "2.5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+        {/* RightUpper - 2.5dvh */}
+        <div style={{ height: "2.5dvh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <RightUpper {...rightUpperProps} />
         </div>
-        {/* RightLower */}
-        <div style={{ height: activeApp === "userinfoapp" || show2FA ? "95vh" : "80vh", overflow: "hidden", minHeight: 0 }}>
+        {/* RightLower - flex:1 */}
+        <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
           <RightLower {...rightLowerProps} leftLowerProps={leftLowerProps} />
         </div>
-        {activeApp !== "userinfoapp" && (
-          <div style={{ height: "15vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+        {activeApp !== "userinfoapp" && !show2FA && (
+          <div style={{ height: "15dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
             <LeftLower {...leftLowerProps} />
           </div>
         )}
