@@ -12,7 +12,7 @@ export function useOrientation() {
 
       if (mobile) {
         try {
-          screen.orientation.lock("portrait").catch(() => {});
+          (screen.orientation as any).lock("portrait").catch(() => {});
         } catch {}
       }
     };
