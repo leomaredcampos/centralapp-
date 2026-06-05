@@ -23,7 +23,6 @@ export interface UserInfoHandle {
 interface AppUserInfoProps {}
 
 const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>((_, ref) => {
-  const router = useRouter();
   const [form, setForm] = useState({
     fname: "", lname: "", mname: "", sname: "",
     userid: "", usertype: "", userdept: "", userposition: "",
