@@ -5,6 +5,9 @@ import { useEffect } from "react";
 export default function PreventZoom() {
   useEffect(() => {
     const preventZoom = (e: WheelEvent | KeyboardEvent) => {
+      const isPortrait = window.screen.height > window.screen.width;
+      if (isPortrait) return;
+
       if (e instanceof WheelEvent && e.ctrlKey) {
         e.preventDefault();
       }
