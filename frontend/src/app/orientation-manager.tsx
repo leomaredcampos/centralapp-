@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function OrientationManager() {
   useEffect(() => {
     function apply() {
-      const isMobile = window.innerWidth < 768;
+      const isMobile = window.innerWidth < 1024;
 
       if (isMobile) {
         // Portrait — 14pt font, allow pinch zoom
