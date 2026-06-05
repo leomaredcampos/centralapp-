@@ -43,7 +43,7 @@ export default function DashboardPage() {
             <LeftUpper />
           </div>
         )}
-        <div className="flex-shrink-0" style={isPortrait ? { height: "5vh" } : {}}>
+        <div className="flex-shrink-0" style={isPortrait ? { height: "5vh" } : { height: "5%" }}>
           <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
           <div className="border-t-[0.25px] border-black" />
         </div>
