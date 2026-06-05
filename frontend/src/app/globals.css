@@ -48,7 +48,7 @@ body {
 }
 
 body {
-  font-size: clamp(12px, min(1.17vw, 1.709dvh), 16px);
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+  font-size: min(1.17vw, 1.709dvh);
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
