@@ -54,3 +54,7 @@ body[data-orientation="portrait"] {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
+
+body[data-orientation="portrait"] * {
+  font-size: inherit !important;
+}
