@@ -10,6 +10,7 @@ import { UserInfoHandle } from "../appuserinfo/rightbody/appuserinfoUSERDATA/pag
 import { useSessionCheck } from "./hooks/useSessionCheck";
 import { useDashboardData } from "./hooks/useDashboardData";
 import { useSearchNavigation } from "./hooks/useSearchNavigation";
+import { useOrientation } from "./hooks/useOrientation";
 
 export default function DashboardPage() {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ export default function DashboardPage() {
 
   const { filtered, searchList, loadApps, handleSearch } = useDashboardData();
   const { searchVal, setSearchVal, handlePrev, handleNext } = useSearchNavigation(searchList);
+  const isPortrait = useOrientation();
 
   useSessionCheck((validEmail) => {
     setEmail(validEmail);
@@ -35,20 +37,25 @@ export default function DashboardPage() {
       </div>
       {/* Right Content */}
       <div className="flex flex-col w-full md:w-[85%] h-screen overflow-hidden">
-        {/* Mobile: LeftUpper */}
-        <div className="md:hidden flex-shrink-0 border-b-[0.25px] border-black">
-          <LeftUpper />
-        </div>
-        <div className="flex-shrink-0">
+        {/* Portrait: LeftUpper sa taas */}
+        {isPortrait && (
+          <div className="flex-shrink-0 border-b-[0.25px] border-black" style={{ height: "5vh" }}>
+            <LeftUpper />
+          </div>
+        )}
+        <div className="flex-shrink-0" style={isPortrait ? { height: "5vh" } : {}}>
           <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
           <div className="border-t-[0.25px] border-black" />
         </div>
-        <div className="flex-1 md:h-[85%] overflow-hidden min-h-0">
+        <div className="flex-1 overflow-hidden min-h-0">
           <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
         </div>
-        <div className="md:hidden max-md:h-[5vh] flex-shrink-0 border-t-[0.25px] border-black">
-          <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
-        </div>
+        {/* Portrait: LeftLower sa baba */}
+        {isPortrait && (
+          <div className="flex-shrink-0 border-t-[0.25px] border-black" style={{ height: "5vh" }}>
+            <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
+          </div>
+        )}
       </div>
     </div>
   );
