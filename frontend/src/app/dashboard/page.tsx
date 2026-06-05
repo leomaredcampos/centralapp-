@@ -48,7 +48,7 @@ export default function DashboardPage() {
           <RightLower {...rightLowerProps} leftLowerProps={leftLowerProps} />
         </div>
         {activeApp !== "userinfoapp" && (
-          <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+          <div style={{ height: "15vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
             <LeftLower {...leftLowerProps} />
           </div>
         )}
