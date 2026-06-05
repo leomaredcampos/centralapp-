@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import LeftUpper from "./components/LeftUpper";
 import LeftLower from "./components/LeftLower";
 import RightUpper from "./components/RightUpper";
@@ -22,10 +22,12 @@ export default function DashboardPage() {
   const { searchVal, setSearchVal, handlePrev, handleNext } = useSearchNavigation(searchList);
   const isPortrait = useOrientation();
 
-  useSessionCheck((validEmail) => {
+  const onValidSession = useCallback((validEmail: string) => {
     setEmail(validEmail);
     loadApps(validEmail);
-  });
+  }, []);
+
+  useSessionCheck(onValidSession);
 
   const rightUpperProps = { email, show2FA, activeApp, on2FA: () => setShow2FA(!show2FA), onBack: () => { setActiveApp(""); setShow2FA(false); }, searchList, searchVal, onSearchChange: setSearchVal, onPrev: handlePrev, onNext: handleNext, userInfoRef };
   const rightLowerProps = { show2FA, apps: filtered, activeApp, onAppClick: (appname: string) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }, userInfoRef };
