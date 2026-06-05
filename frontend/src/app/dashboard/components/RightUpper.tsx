@@ -49,12 +49,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
         )}
         <div className="ml-auto flex items-center gap-[4px] md:gap-[8px] shrink-0">
           {!isUserInfo && !show2FA && (
-            <button onClick={on2FA} className="text-blue-600 bg-transparent border-none cursor-pointer hover:underline whitespace-nowrap">
-              2FA
-            </button>
-          )}
-          {(isUserInfo || show2FA) && (
-            <span className="whitespace-nowrap text-black">← Back</span>
+            <button onClick={on2FA} className="text-blue-600 bg-transparent border-none cursor-pointer hover:underline whitespace-nowrap">2FA</button>
           )}
           <span className="truncate max-w-[120px] md:max-w-none">{email}</span>
         </div>
