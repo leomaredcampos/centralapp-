@@ -28,7 +28,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
   }
 
   return (
-    <div className="flex flex-col rounded-lg shadow-sm bg-white" style={{ height: "100%", overflow: "hidden" }}>
+    <div className="flex flex-col rounded-lg shadow-sm bg-white" style={{ overflow: "hidden" }}>
       <div className="flex-shrink-0 px-[6px] py-[2px] border-b-[0.25px] border-black bg-gray-50 flex flex-wrap items-center gap-[4px]">
         <input placeholder="Type to search..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "25.5%" }} />
         <span className="text-black">Search</span>
