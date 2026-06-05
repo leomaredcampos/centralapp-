@@ -48,7 +48,7 @@ export default function DashboardPage() {
           <RightLower {...rightLowerProps} />
         </div>
         {/* LeftLower - always visible */}
-        <div style={{ height: "15dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+        <div style={{ height: "5dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
           <LeftLower {...leftLowerProps} />
         </div>
       </div>
