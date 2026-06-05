@@ -38,7 +38,6 @@ body {
 }
 
 *, input, select, button, textarea, label, span, th, td {
-  font-size: inherit;
   font-family: inherit;
   word-break: break-word;
   overflow-wrap: break-word;
