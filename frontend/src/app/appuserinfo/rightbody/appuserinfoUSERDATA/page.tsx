@@ -79,22 +79,25 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
         </div>
       </div>
 
-      {/* Mobile/Portrait Layout — Vertical Stack */}
-      <div className="flex md:hidden flex-col overflow-y-auto" style={{ flex: "0 0 63%" }}>
-        {/* Employee Information Panel */}
-        <div className="w-full min-h-0 border-b-[0.25px] border-black">
-          <EmployeeInfoPanel form={form} onChange={handleChange} />
+      {/* Mobile/Portrait Layout — 3 Frames takes full height, Left Lower sa baba */}
+      <div className="flex md:hidden flex-col overflow-hidden" style={{ flex: "1 1 0%", minHeight: 0 }}>
+        {/* 3 Information Panels — scrollable, fills remaining space */}
+        <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+          {/* Employee Information Panel */}
+          <div className="w-full border-b-[0.25px] border-black">
+            <EmployeeInfoPanel form={form} onChange={handleChange} />
+          </div>
+          {/* Company Information Panel (new format) */}
+          <div className="w-full border-b-[0.25px] border-black">
+            <CompanyInfoPanel form={form} onChange={handleChange} />
+          </div>
+          {/* System Information Panel */}
+          <div className="w-full border-b-[0.25px] border-black">
+            <SystemInfoPanel />
+          </div>
         </div>
-        {/* Company Information Panel (new format) */}
-        <div className="w-full min-h-0 border-b-[0.25px] border-black">
-          <CompanyInfoPanel form={form} onChange={handleChange} />
-        </div>
-        {/* System Information Panel */}
-        <div className="w-full min-h-0 border-b-[0.25px] border-black">
-          <SystemInfoPanel />
-        </div>
-        {/* Navigation Panel (Left Lower equivalent) */}
-        <div className="w-full flex flex-col p-[10px] gap-[8px]">
+        {/* Left Lower Navigation — fixed sa baba */}
+        <div className="flex-shrink-0 w-full flex flex-col p-[10px] gap-[8px] border-t-[0.25px] border-black bg-white">
           <button className={btnClass}>User Info Data</button>
           <button className={btnClass}>Payroll Computation</button>
           <button className={btnClass}>Access Control</button>
