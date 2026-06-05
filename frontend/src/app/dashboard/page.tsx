@@ -35,16 +35,16 @@ export default function DashboardPage() {
   if (isPortrait) {
     return (
       <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        {/* LeftUpper - 5vh */}
-        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+        {/* LeftUpper - 2.5vh */}
+        <div style={{ height: "2.5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <LeftUpper />
         </div>
-        {/* RightUpper - 5vh */}
-        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+        {/* RightUpper - 2.5vh */}
+        <div style={{ height: "2.5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <RightUpper {...rightUpperProps} />
         </div>
-        {/* RightLower - 85vh */}
-        <div style={{ height: "85vh", overflow: "hidden" }}>
+        {/* RightLower - 90vh */}
+        <div style={{ height: "90vh", overflow: "hidden" }}>
           <RightLower {...rightLowerProps} />
         </div>
         {/* LeftLower - 5vh */}
