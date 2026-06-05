@@ -11,16 +11,19 @@ export default function SystemInfoPanel() {
         <span className="text-black text-[clamp(10px,0.78vw,16px)]">System Information</span>
       </div>
       <div className="flex-1 min-h-0 px-[6px] py-[1px] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
+        {/* Row 1: Account Status | As of Date */}
         <div className={row2}>
-          <div><label className={lbl}>Employee Account Status</label><input readOnly className={`${inp} bg-gray-50`} /></div>
-          <div><label className={lbl}>As Date of</label><input readOnly className={`${inp} bg-gray-50`} /></div>
+          <div><label className={lbl}>Account Status</label><input readOnly className={`${inp} bg-gray-50`} /></div>
+          <div><label className={lbl}>As of Date</label><input readOnly className={`${inp} bg-gray-50`} /></div>
         </div>
+        {/* Row 2: Expiration Date | User Level */}
         <div className={row2}>
           <div><label className={lbl}>Expiration Date</label><input readOnly className={`${inp} bg-gray-50`} /></div>
           <div><label className={lbl}>User Level</label><input readOnly className={`${inp} bg-gray-50`} /></div>
         </div>
+        {/* Row 3: Write By */}
         <div className={row2}>
-          <div className="col-span-2"><label className={lbl}>Written By</label><input readOnly className={`${inp} bg-gray-50`} /></div>
+          <div className="col-span-2"><label className={lbl}>Write By</label><input readOnly className={`${inp} bg-gray-50`} /></div>
         </div>
       </div>
     </div>

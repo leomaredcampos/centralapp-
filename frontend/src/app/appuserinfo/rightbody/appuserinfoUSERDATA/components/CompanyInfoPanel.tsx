@@ -17,19 +17,25 @@ export default function CompanyInfoPanel({ form, onChange }: Props) {
         <span className="text-black text-[clamp(10px,0.78vw,16px)]">Company Information</span>
       </div>
       <div className="flex-1 min-h-0 px-[6px] py-[1px] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: "thin" }}>
-        <div className={row2}>
+        {/* Row 1: Company ID | Company Name | Company TIN */}
+        <div className="grid grid-cols-3 gap-[2px] mb-[1px]">
           <div><label className={lbl}>Company ID</label><input name="companyid" value={form.companyid} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Company Name</label><input name="companyname" value={form.companyname} onChange={onChange} className={inp} /></div>
-        </div>
-        <div className={row2}>
-          <div><label className={lbl}>Business Type</label><input name="businesstype" value={form.businesstype} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Company TIN</label><input name="companytin" value={form.companytin} onChange={onChange} className={inp} /></div>
         </div>
-        <div className={row2}>
+        {/* Row 2: Business Type | Company Type 1 | Company Type 2 */}
+        <div className="grid grid-cols-3 gap-[2px] mb-[1px]">
+          <div><label className={lbl}>Business Type</label><input name="businesstype" value={form.businesstype} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Company Type 1</label><input name="companytype1" value={form.companytype1} onChange={onChange} className={inp} /></div>
           <div><label className={lbl}>Company Type 2</label><input name="companytype2" value={form.companytype2} onChange={onChange} className={inp} /></div>
         </div>
-        <div className={row2}>
+        {/* Row 3: Contact 1 | Contact 2 */}
+        <div className="grid grid-cols-2 gap-[2px] mb-[1px]">
+          <div><label className={lbl}>Contact 1</label><input name="companycontact1" value={form.companycontact1} onChange={onChange} className={inp} /></div>
+          <div><label className={lbl}>Contact 2</label><input name="companycontact2" value={form.companycontact2} onChange={onChange} className={inp} /></div>
+        </div>
+        {/* Row 4: Company Main Logo | Company Login Logo */}
+        <div className="grid grid-cols-2 gap-[2px] mb-[1px]">
           <div>
             <label className={lbl}>Company Main Logo</label>
             <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
@@ -45,13 +51,13 @@ export default function CompanyInfoPanel({ form, onChange }: Props) {
             </label>
           </div>
         </div>
-        <div className={row2}>
-          <div><label className={lbl}>Contact 1</label><input name="companycontact1" value={form.companycontact1} onChange={onChange} className={inp} /></div>
-          <div><label className={lbl}>Contact 2</label><input name="companycontact2" value={form.companycontact2} onChange={onChange} className={inp} /></div>
-        </div>
+        {/* Row 5: Company Address */}
         <div className="mb-[1px]"><label className={lbl}>Company Address {req}</label><input name="companyaddress" value={form.companyaddress} onChange={onChange} className={inp} /></div>
+        {/* Row 6: Company Email 1 */}
         <div className="mb-[1px]"><label className={lbl}>Company Email 1</label><input name="companyemail1" value={form.companyemail1} onChange={onChange} className={inp} /></div>
+        {/* Row 7: Company Email 2 */}
         <div className="mb-[1px]"><label className={lbl}>Company Email 2</label><input name="companyemail2" value={form.companyemail2} onChange={onChange} className={inp} /></div>
+        {/* Row 8: Website */}
         <div className="mb-[1px]"><label className={lbl}>Website</label><input name="companysite" value={form.companysite} onChange={onChange} className={inp} /></div>
       </div>
     </div>
