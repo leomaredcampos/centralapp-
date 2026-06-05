@@ -98,7 +98,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>(({ lef
   // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   return (
     <div style={{ width: "100%", height: "calc(100dvh - 5vh)", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
-      <div style={{ flexShrink: 0, borderBottom: "0.25px solid black" }}>
+      <div style={{ height: "10vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
       </div>
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }}>
