@@ -5,6 +5,7 @@ import UserInfoDataGrid from "./components/UserInfoDataGrid";
 import EmployeeInfoPanel from "./components/EmployeeInfoPanel";
 import CompanyInfoPanel from "./components/CompanyInfoPanel";
 import SystemInfoPanel from "./components/SystemInfoPanel";
+import LeftLower from "../../../dashboard/components/LeftLower";
 import { useUserInfoData } from "./hooks/useUserInfoData";
 import { useUserInfoActions } from "./hooks/useUserInfoActions";
 import { useAppAccess } from "./hooks/useAppAccess";
@@ -20,7 +21,21 @@ export interface UserInfoHandle {
   loading: boolean;
 }
 
-const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
+interface LeftLowerProps {
+  count: number;
+  onSearch: (query: string) => void;
+  activeApp: string;
+  onBack: () => void;
+  onUserInfoData?: () => void;
+  onPayroll?: () => void;
+  onAccessControl?: () => void;
+}
+
+interface AppUserInfoProps {
+  leftLowerProps?: LeftLowerProps;
+}
+
+const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>(({ leftLowerProps }, ref) => {
   const [form, setForm] = useState({
     fname: "", lname: "", mname: "", sname: "",
     userid: "", usertype: "", userdept: "", userposition: "",
@@ -82,7 +97,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
   // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   return (
-    <div style={{ width: "100%", height: "90vh", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
+    <div style={{ width: "100%", height: "95vh", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
       <div style={{ flexShrink: 0, borderBottom: "0.25px solid black" }}>
         <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
       </div>
@@ -97,6 +112,11 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
           <SystemInfoPanel isPortrait />
         </div>
       </div>
+      {leftLowerProps && (
+        <div style={{ height: "5vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+          <LeftLower {...leftLowerProps} />
+        </div>
+      )}
     </div>
   );
 });

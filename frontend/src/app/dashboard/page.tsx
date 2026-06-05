@@ -45,12 +45,14 @@ export default function DashboardPage() {
         </div>
         {/* RightLower - remaining space */}
         <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
-          <RightLower {...rightLowerProps} />
+          <RightLower {...rightLowerProps} leftLowerProps={leftLowerProps} />
         </div>
-        {/* LeftLower - 5vh */}
-        <div style={{ height: "5vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
-          <LeftLower {...leftLowerProps} />
-        </div>
+        {/* LeftLower removed here - now inside AppUserInfoRightBody portrait */}
+        {activeApp !== "userinfoapp" && (
+          <div style={{ height: "5vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+            <LeftLower {...leftLowerProps} />
+          </div>
+        )}
       </div>
     );
   }

@@ -9,25 +9,34 @@ interface App {
   buttonname: string;
 }
 
+interface LeftLowerProps {
+  count: number;
+  onSearch: (query: string) => void;
+  activeApp: string;
+  onBack: () => void;
+  onUserInfoData?: () => void;
+  onPayroll?: () => void;
+  onAccessControl?: () => void;
+}
+
 interface Props {
   show2FA: boolean;
   apps: App[];
   activeApp: string;
   onAppClick: (appname: string) => void;
   userInfoRef?: React.RefObject<UserInfoHandle | null>;
+  leftLowerProps?: LeftLowerProps;
 }
 
-export default function RightLower({ show2FA, apps, activeApp, onAppClick, userInfoRef }: Props) {
+export default function RightLower({ show2FA, apps, activeApp, onAppClick, userInfoRef, leftLowerProps }: Props) {
   if (show2FA) return (
     <div className="h-full bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <TwoFactorPage />
     </div>
   );
   if (activeApp === "userinfoapp") return (
-    <div className="h-full p-[10px] flex bg-gradient-to-br from-white via-gray-50 to-gray-100">
-      <div className="flex-1 min-h-0" style={{ height: "100%" }}>
-        <AppUserInfoRightBody ref={userInfoRef} />
-      </div>
+    <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+      <AppUserInfoRightBody ref={userInfoRef} leftLowerProps={leftLowerProps} />
     </div>
   );
 
