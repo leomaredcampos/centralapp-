@@ -61,10 +61,9 @@ export default function DashboardPage() {
       {/* Left Sidebar - 15vw */}
       <div style={{ width: "15vw", height: "100vh", display: "flex", flexDirection: "column", borderRight: "0.25px solid black", flexShrink: 0 }}>
         {/* LeftUpper - 5vh */}
-        <div style={{ height: "5vh", flexShrink: 0 }}>
+        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <LeftUpper />
         </div>
-        <div style={{ borderTop: "0.25px solid black" }} />
         {/* LeftLower - remaining */}
         <div style={{ flex: 1, overflow: "hidden" }}>
           <LeftLower {...leftLowerProps} />
