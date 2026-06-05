@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import LoginLogo from "./components/LoginLogo";
 import EmailStep from "./components/EmailStep";
 import OtpStep from "./components/OtpStep";
@@ -13,26 +14,26 @@ export default function LoginPage() {
   const { handleEmailSubmit, handleOTPVerify, handleTOTPVerify } = useLoginFlow(email, otp);
   const isPortrait = useOrientation();
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    if (isPortrait) {
+      html.style.cssText = "overflow: auto; height: auto; width: 100%;";
+      body.style.cssText = "overflow: auto; height: auto; width: 100%; position: relative; top: auto; left: auto; font-size: 14pt;";
+    }
+    return () => {
+      html.style.cssText = "";
+      body.style.cssText = "";
+    };
+  }, [isPortrait]);
+
   const stepContent = (
     <>
       {step === "email" && (
-        <EmailStep
-          email={email}
-          setEmail={setEmail}
-          onSubmit={async () => {
-            const data = await handleEmailSubmit();
-            return handleEmailStepResult(data);
-          }}
-        />
+        <EmailStep email={email} setEmail={setEmail} onSubmit={async () => { const data = await handleEmailSubmit(); return handleEmailStepResult(data); }} />
       )}
       {step === "otp" && (
-        <OtpStep
-          otp={otp}
-          setOtp={setOtp}
-          onSubmit={handleOTPVerify}
-          expiresIn={otpExpires}
-          onExpired={() => setStep("email")}
-        />
+        <OtpStep otp={otp} setOtp={setOtp} onSubmit={handleOTPVerify} expiresIn={otpExpires} onExpired={() => setStep("email")} />
       )}
       {step === "totp" && (
         <AuthenticatorStep onSubmit={handleTOTPVerify} />
@@ -40,19 +41,15 @@ export default function LoginPage() {
     </>
   );
 
-  // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   if (isPortrait) {
     return (
-      <div style={{ width: "100dvw", height: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#f5f5f5", fontSize: "14pt" }}>
-        <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "white", padding: "20px" }}>
-          <LoginLogo />
-          {stepContent}
-        </div>
+      <div style={{ width: "100vw", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "white", fontSize: "14pt" }}>
+        <LoginLogo />
+        {stepContent}
       </div>
     );
   }
 
-  // ─── LANDSCAPE LAYOUT ──────────────────────────────────────────────
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100dvh", width: "100%", background: "#f5f5f5", fontSize: "14pt" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", background: "white", padding: "20px 20px 40px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
