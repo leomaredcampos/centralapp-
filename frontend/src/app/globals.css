@@ -49,3 +49,9 @@ body {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
+
+body[data-orientation="portrait"] {
+  font-size: 14pt !important;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}

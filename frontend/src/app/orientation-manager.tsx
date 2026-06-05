@@ -9,14 +9,13 @@ export default function OrientationManager() {
 
       if (isMobile) {
         // Portrait — 14pt font, allow pinch zoom
-        document.body.style.fontSize = "14pt";
+        document.body.setAttribute("data-orientation", "portrait");
         document.documentElement.style.overflow = "";
         document.body.style.overflow = "";
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.left = "";
 
-        // Update viewport meta to allow zoom
         let meta = document.querySelector("meta[name=viewport]") as HTMLMetaElement;
         if (!meta) {
           meta = document.createElement("meta");
@@ -26,7 +25,7 @@ export default function OrientationManager() {
         meta.content = "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes";
       } else {
         // Landscape — formula font, prevent zoom
-        document.body.style.fontSize = "";
+        document.body.setAttribute("data-orientation", "landscape");
         document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
         document.body.style.position = "fixed";
