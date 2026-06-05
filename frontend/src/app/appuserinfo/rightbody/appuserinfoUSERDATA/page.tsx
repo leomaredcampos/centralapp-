@@ -86,16 +86,13 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
       <div style={{ height: "10vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
       </div>
-      {/* Employee - 35vh */}
       <div style={{ height: "35vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <EmployeeInfoPanel form={form} onChange={handleChange} />
       </div>
-      {/* Company - 30vh */}
       <div style={{ height: "30vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <CompanyInfoPanel form={form} onChange={handleChange} />
       </div>
-      {/* System - 15vh */}
-      <div style={{ height: "15vh", flexShrink: 0, overflow: "hidden" }}>
+      <div style={{ flex: 1, overflow: "hidden" }}>
         <SystemInfoPanel />
       </div>
     </div>
