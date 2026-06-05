@@ -54,9 +54,7 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
             </button>
           )}
           {(isUserInfo || show2FA) && (
-            <button onClick={onBack} className="text-black bg-transparent border-none cursor-pointer hover:underline whitespace-nowrap">
-              ← Back
-            </button>
+            <span className="whitespace-nowrap text-black">← Back</span>
           )}
           <span className="truncate max-w-[120px] md:max-w-none">{email}</span>
         </div>
