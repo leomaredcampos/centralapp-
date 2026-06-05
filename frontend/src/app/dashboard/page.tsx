@@ -27,36 +27,59 @@ export default function DashboardPage() {
     loadApps(validEmail);
   });
 
-  return (
-    <div className="flex flex-col md:flex-row w-full h-screen overflow-hidden">
-      {/* Left Sidebar - hidden on mobile, 15% on desktop */}
-      <div className="hidden md:flex flex-col w-[15%] h-screen border-r-[0.25px] border-black">
-        <LeftUpper />
-        <div className="border-t-[0.25px] border-black" />
-        <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
+  const rightUpperProps = { email, show2FA, activeApp, on2FA: () => setShow2FA(!show2FA), onBack: () => { setActiveApp(""); setShow2FA(false); }, searchList, searchVal, onSearchChange: setSearchVal, onPrev: handlePrev, onNext: handleNext, userInfoRef };
+  const rightLowerProps = { show2FA, apps: filtered, activeApp, onAppClick: (appname: string) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }, userInfoRef };
+  const leftLowerProps = { count: filtered.length, onSearch: handleSearch, activeApp, onBack: () => setActiveApp(""), onUserInfoData: () => setActiveApp("userinfoapp"), onPayroll: () => setActiveApp("payroll"), onAccessControl: () => setActiveApp("accesscontrol") };
+
+  // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
+  if (isPortrait) {
+    return (
+      <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        {/* LeftUpper - 5vh */}
+        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+          <LeftUpper />
+        </div>
+        {/* RightUpper - 5vh */}
+        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+          <RightUpper {...rightUpperProps} />
+        </div>
+        {/* RightLower - 85vh */}
+        <div style={{ height: "85vh", overflow: "hidden" }}>
+          <RightLower {...rightLowerProps} />
+        </div>
+        {/* LeftLower - 5vh */}
+        <div style={{ height: "5vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+          <LeftLower {...leftLowerProps} />
+        </div>
       </div>
-      {/* Right Content */}
-      <div className="flex flex-col w-full md:w-[85%] h-screen overflow-hidden">
-        {/* Portrait: LeftUpper sa taas */}
-        {isPortrait && (
-          <div className="flex-shrink-0 border-b-[0.25px] border-black" style={{ height: "5vh" }}>
-            <LeftUpper />
-          </div>
-        )}
-        {/* RightUpper */}
-        <div className="flex-shrink-0" style={{ height: "5vh" }}>
-          <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
+    );
+  }
+
+  // ─── LANDSCAPE LAYOUT ──────────────────────────────────────────────
+  return (
+    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "row", overflow: "hidden" }}>
+      {/* Left Sidebar - 15vw */}
+      <div style={{ width: "15vw", height: "100vh", display: "flex", flexDirection: "column", borderRight: "0.25px solid black", flexShrink: 0 }}>
+        {/* LeftUpper - 5vh */}
+        <div style={{ height: "5vh", flexShrink: 0 }}>
+          <LeftUpper />
         </div>
-        <div className="border-t-[0.25px] border-black flex-shrink-0" />
-        <div className="flex-1 overflow-hidden min-h-0">
-          <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
+        <div style={{ borderTop: "0.25px solid black" }} />
+        {/* LeftLower - remaining */}
+        <div style={{ flex: 1, overflow: "hidden" }}>
+          <LeftLower {...leftLowerProps} />
         </div>
-        {/* Portrait: LeftLower sa baba */}
-        {isPortrait && (
-          <div className="flex-shrink-0 border-t-[0.25px] border-black" style={{ height: "5vh" }}>
-            <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
-          </div>
-        )}
+      </div>
+      {/* Right Content - 85vw */}
+      <div style={{ width: "85vw", height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        {/* RightUpper - 5vh */}
+        <div style={{ height: "5vh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
+          <RightUpper {...rightUpperProps} />
+        </div>
+        {/* RightLower - remaining */}
+        <div style={{ flex: 1, overflow: "hidden" }}>
+          <RightLower {...rightLowerProps} />
+        </div>
       </div>
     </div>
   );
