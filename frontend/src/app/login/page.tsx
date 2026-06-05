@@ -40,17 +40,17 @@ export default function LoginPage() {
   const btnLabel = step === "email" ? "Continue" : "Verify";
   const inputEl = step === "email" ? (
     <>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "85vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>Email Address</p>
     </>
   ) : step === "otp" ? (
     <>
-      <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "85vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>OTP</p>
     </>
   ) : (
     <>
-      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "85vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>Authenticator Code</p>
     </>
   );
@@ -69,7 +69,7 @@ export default function LoginPage() {
         </div>
         {/* BOTTOM */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <button onClick={onContinue} disabled={loading} style={{ width: "85vw", padding: "6px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", fontSize: "inherit" }}>
+          <button onClick={onContinue} disabled={loading} style={{ width: "95vw", padding: "6px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", fontSize: "inherit" }}>
             {btnLabel}
           </button>
         </div>
@@ -81,23 +81,23 @@ export default function LoginPage() {
   const stepContent = step === "email" ? (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Login</p>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "450px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>Email Address</p>
-      <button onClick={onContinue} disabled={loading} style={{ width: "450px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Continue</button>
+      <button onClick={onContinue} disabled={loading} style={{ width: "95vw", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Continue</button>
     </>
   ) : step === "otp" ? (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Verification</p>
-      <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "450px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>OTP</p>
-      <button onClick={onContinue} disabled={loading} style={{ width: "450px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
+      <button onClick={onContinue} disabled={loading} style={{ width: "95vw", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
     </>
   ) : (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Authenticator</p>
-      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "450px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>Authenticator Code</p>
-      <button onClick={onContinue} disabled={loading} style={{ width: "450px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
+      <button onClick={onContinue} disabled={loading} style={{ width: "95vw", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
     </>
   );
 
