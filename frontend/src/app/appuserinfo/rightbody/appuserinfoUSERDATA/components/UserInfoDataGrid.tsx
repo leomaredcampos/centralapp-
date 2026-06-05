@@ -16,12 +16,14 @@ interface Props {
   users: User[];
   onPrev?: () => void;
   onNext?: () => void;
+  maxRows?: number;
 }
 
 const btnClass = "px-[8px] py-[1px] bg-white border-[0.25px] border-black cursor-pointer hover:bg-gray-50";
 
-export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
+export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Props) {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const displayUsers = maxRows ? users.slice(0, maxRows) : users;
 
   function toggleRow(emailx: string) {
     setSelectedRows((prev) => prev.includes(emailx) ? prev.filter((e) => e !== emailx) : [...prev, emailx]);
@@ -53,7 +55,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext }: Props) {
             </tr>
           </thead>
           <tbody>
-            {users.map((u, i) => (
+            {displayUsers.map((u, i) => (
               <tr key={i} className="border-b-[0.25px] border-black hover:bg-gray-50 cursor-pointer">
                 <td className="px-[6px] py-[2px] text-center bg-white" style={{ position: "sticky", left: 0, zIndex: 10, width: "2.2%" }}>
                   <input type="checkbox" checked={selectedRows.includes(u.emailx)} onChange={() => toggleRow(u.emailx)} />
