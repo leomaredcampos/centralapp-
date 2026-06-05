@@ -19,8 +19,6 @@ export interface UserInfoHandle {
   loading: boolean;
 }
 
-const btnClass = "w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium";
-
 const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
   const [form, setForm] = useState({
     fname: "", lname: "", mname: "", sname: "",
@@ -96,40 +94,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
             <SystemInfoPanel />
           </div>
         </div>
-        {/* Left Lower Navigation — fixed sa baba */}
-        <div className="flex-shrink-0 w-full flex flex-col p-[10px] gap-[8px] border-t-[0.25px] border-black bg-white">
-          <button className={btnClass}>User Info Data</button>
-          <button className={btnClass}>Payroll Computation</button>
-          <button className={btnClass}>Access Control</button>
-          <div className="flex-1" />
-          <button
-            onClick={async () => {
-              const email = localStorage.getItem("email");
-              const authtype = localStorage.getItem("authtype");
-              const sessionid = localStorage.getItem("sessionid");
-              if (authtype === "totp" && sessionid) {
-                await fetch("/api/delete-totp-session", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ email, sessionid }),
-                });
-              } else {
-                await fetch("/api/logout", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ email }),
-                });
-              }
-              localStorage.removeItem("email");
-              localStorage.removeItem("sessionid");
-              localStorage.removeItem("authtype");
-              window.location.href = "/login";
-            }}
-            className="w-full text-[clamp(10px,2vw,16px)] p-[4px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-[#ff0000] border-l-0 border-r-0 cursor-pointer text-[#ff0000] hover:bg-red-50 transition-colors"
-          >
-            Logout
-          </button>
-        </div>
+
       </div>
     </div>
   );
