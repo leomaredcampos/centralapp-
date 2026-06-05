@@ -1,7 +1,7 @@
 "use client";
 
-const lbl = "text-black leading-none text-[clamp(10px,0.78vw,16px)]";
-const inp = "w-full p-[1px] border-[0.25px] border-black outline-none text-[clamp(10px,0.78vw,16px)]";
+const lbl = "text-black leading-none ";
+const inp = "w-full p-[1px] border-[0.25px] border-black outline-none ";
 const row2 = "grid grid-cols-2 gap-[2px] mb-[1px]";
 
 interface Props {
@@ -27,7 +27,7 @@ export default function SystemInfoPanel({ isPortrait }: Props) {
 
   const header = (
     <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
-      <span className="text-black text-[clamp(10px,0.78vw,16px)]">System Information</span>
+      <span className="text-black ">System Information</span>
     </div>
   );
 

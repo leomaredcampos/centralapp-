@@ -1,7 +1,7 @@
 "use client";
 
-const lbl = "text-black leading-none text-[clamp(10px,0.78vw,16px)]";
-const inp = "w-full p-[1px] border-[0.25px] border-black outline-none text-[clamp(10px,0.78vw,16px)]";
+const lbl = "text-black leading-none";
+const inp = "w-full p-[1px] border-[0.25px] border-black outline-none";
 const req = <span className="text-red-500">*</span>;
 const row3 = "grid grid-cols-3 gap-[2px] mb-[1px]";
 
@@ -53,7 +53,7 @@ export default function EmployeeInfoPanel({ form, onChange, isPortrait }: Props)
           <div>
             <label className={lbl}>ID Photo {req}</label>
             <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
-              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10px,0.78vw,16px)]">Choose file</span>
+              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap ">Choose file</span>
               <input type="file" name="idphoto" className="hidden" />
             </label>
           </div>
@@ -69,14 +69,14 @@ export default function EmployeeInfoPanel({ form, onChange, isPortrait }: Props)
           <div>
             <label className={lbl}>Signature {req}</label>
             <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
-              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10px,0.78vw,16px)]">Choose file</span>
+              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap ">Choose file</span>
               <input type="file" name="usersign" className="hidden" />
             </label>
           </div>
           <div>
             <label className={lbl}>Others {req}</label>
             <label className="flex items-center gap-[2px] border-[0.25px] border-black p-[0px] cursor-pointer w-full">
-              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap text-[clamp(10px,0.78vw,16px)]">Choose file</span>
+              <span className="text-blue-600 border-b-[0.25px] border-blue-600 whitespace-nowrap ">Choose file</span>
               <input type="file" name="requirementsx" multiple className="hidden" />
             </label>
           </div>
@@ -93,7 +93,7 @@ export default function EmployeeInfoPanel({ form, onChange, isPortrait }: Props)
 
   const header = (
     <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50">
-      <span className="text-black text-[clamp(10px,0.78vw,16px)]">Employee Information</span>
+      <span className="text-black ">Employee Information</span>
     </div>
   );
 
