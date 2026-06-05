@@ -29,7 +29,7 @@ export default function DashboardPage() {
 
   const rightUpperProps = { email, show2FA, activeApp, on2FA: () => setShow2FA(!show2FA), onBack: () => { setActiveApp(""); setShow2FA(false); }, searchList, searchVal, onSearchChange: setSearchVal, onPrev: handlePrev, onNext: handleNext, userInfoRef };
   const rightLowerProps = { show2FA, apps: filtered, activeApp, onAppClick: (appname: string) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }, userInfoRef };
-  const leftLowerProps = { count: filtered.length, onSearch: handleSearch, activeApp, onBack: () => setActiveApp(""), onUserInfoData: () => setActiveApp("userinfoapp"), onPayroll: () => setActiveApp("payroll"), onAccessControl: () => setActiveApp("accesscontrol") };
+  const leftLowerProps = { count: filtered.length, onSearch: handleSearch, activeApp: activeApp || (show2FA ? "2fa" : ""), onBack: () => { setActiveApp(""); setShow2FA(false); }, onUserInfoData: () => setActiveApp("userinfoapp"), onPayroll: () => setActiveApp("payroll"), onAccessControl: () => setActiveApp("accesscontrol") };
 
   // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   if (isPortrait) {
