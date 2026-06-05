@@ -26,26 +26,28 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen">
-      {/* Left Sidebar - hidden on mobile (LeftLower nasa baba), 15% on desktop */}
+    <div className="flex flex-col md:flex-row w-full h-screen overflow-hidden">
+      {/* Left Sidebar - hidden on mobile, 15% on desktop */}
       <div className="hidden md:flex flex-col w-[15%] h-screen border-r-[0.25px] border-black">
         <LeftUpper />
         <div className="border-t-[0.25px] border-black" />
         <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
       </div>
-      {/* Right Content - full width */}
-      <div className="flex flex-col w-full md:w-[85%] min-h-screen">
-        <div className="flex flex-col flex-1">
-          {/* Mobile: LeftUpper sa itaas ng right section */}
-          <div className="md:hidden border-b-[0.25px] border-black">
-            <LeftUpper />
-          </div>
+      {/* Right Content */}
+      <div className="flex flex-col w-full md:w-[85%] h-screen overflow-hidden">
+        {/* Mobile: LeftUpper */}
+        <div className="md:hidden flex-shrink-0 border-b-[0.25px] border-black">
+          <LeftUpper />
+        </div>
+        <div className="flex-shrink-0">
           <RightUpper email={email} show2FA={show2FA} activeApp={activeApp} on2FA={() => setShow2FA(!show2FA)} onBack={() => { setActiveApp(""); setShow2FA(false); }} searchList={searchList} searchVal={searchVal} onSearchChange={setSearchVal} onPrev={handlePrev} onNext={handleNext} userInfoRef={userInfoRef} />
           <div className="border-t-[0.25px] border-black" />
+        </div>
+        <div className="flex-1 overflow-hidden min-h-0">
           <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
         </div>
-        {/* Mobile: LeftLower nasa pinakababa */}
-        <div className="md:hidden border-t-[0.25px] border-black">
+        {/* Mobile: LeftLower sa pinakababa */}
+        <div className="md:hidden flex-shrink-0 border-t-[0.25px] border-black">
           <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
         </div>
       </div>
