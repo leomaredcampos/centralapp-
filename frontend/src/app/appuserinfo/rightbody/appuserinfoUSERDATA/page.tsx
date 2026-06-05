@@ -113,7 +113,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>(({ lef
         </div>
       </div>
       {leftLowerProps && (
-        <div style={{ height: "5vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+        <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
           <LeftLower {...leftLowerProps} />
         </div>
       )}
