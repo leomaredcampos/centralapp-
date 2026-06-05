@@ -12,7 +12,7 @@ export default function LoginPage() {
   const { handleEmailSubmit, handleOTPVerify, handleTOTPVerify } = useLoginFlow(email, otp);
 
   return (
-    <div className="flex items-center justify-center h-screen w-screen bg-[#f5f5f5]">
+    <div className="flex items-center justify-center min-h-screen w-full bg-[#f5f5f5]">
       <div className="flex flex-col items-center bg-white p-[20px] pb-[40px] shadow-md">
         <LoginLogo />
         {step === "email" && (

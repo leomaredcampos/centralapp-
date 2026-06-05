@@ -32,33 +32,33 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
-    <div className="h-[7%] flex flex-col">
+    <div className="h-auto md:h-[7%] flex flex-col">
       {/* Row 1 */}
-      <div className="flex-1 flex items-center px-[10px] gap-[8px]">
-        <span>{show2FA ? "2FA" : isUserInfo ? "Employee Information App" : "Module"}</span>
+      <div className="flex-1 flex flex-wrap items-center px-[6px] md:px-[10px] gap-[4px] md:gap-[8px] min-h-[44px]">
+        <span className="text-[clamp(10px,2vw,14px)] shrink-0">{show2FA ? "2FA" : isUserInfo ? "Employee Info" : "Module"}</span>
         {isUserInfo && !show2FA && (
           <>
-            <label className="text-blue-600 border-b-[0.25px] border-blue-600 cursor-pointer">
+            <label className="text-blue-600 border-b-[0.25px] border-blue-600 cursor-pointer text-[clamp(10px,2vw,14px)] whitespace-nowrap">
               Choose File
               <input type="file" multiple accept="*" onChange={(e) => userInfoRef?.current?.setFiles(e.target.files)} className="hidden" />
             </label>
-            <span className="text-black">{files && files.length > 0 ? `${files.length} file(s)` : "No file"}</span>
-            <button className={btnClass}>Upload</button>
-            <button onClick={() => userInfoRef?.current?.handleSave()} disabled={userInfoRef?.current?.loading} className={`${btnClass} disabled:opacity-50`}>Save</button>
+            <span className="text-black text-[clamp(10px,2vw,14px)] whitespace-nowrap">{files && files.length > 0 ? `${files.length} file(s)` : "No file"}</span>
+            <button className={`${btnClass} text-[clamp(10px,2vw,14px)] whitespace-nowrap`}>Upload</button>
+            <button onClick={() => userInfoRef?.current?.handleSave()} disabled={userInfoRef?.current?.loading} className={`${btnClass} text-[clamp(10px,2vw,14px)] whitespace-nowrap disabled:opacity-50`}>Save</button>
           </>
         )}
-        <div className="ml-auto flex items-center gap-[8px]">
+        <div className="ml-auto flex items-center gap-[4px] md:gap-[8px] shrink-0">
           {!isUserInfo && !show2FA && (
-            <button onClick={on2FA} className="text-blue-600 bg-transparent border-none cursor-pointer hover:underline">
+            <button onClick={on2FA} className="text-blue-600 bg-transparent border-none cursor-pointer hover:underline text-[clamp(10px,2vw,14px)] whitespace-nowrap">
               2FA
             </button>
           )}
           {(isUserInfo || show2FA) && (
-            <button onClick={onBack} className="text-black bg-transparent border-none cursor-pointer hover:underline">
+            <button onClick={onBack} className="text-black bg-transparent border-none cursor-pointer hover:underline text-[clamp(10px,2vw,14px)] whitespace-nowrap">
               ← Back
             </button>
           )}
-          <span>{email}</span>
+          <span className="text-[clamp(9px,1.8vw,14px)] truncate max-w-[120px] md:max-w-none">{email}</span>
         </div>
       </div>
 
