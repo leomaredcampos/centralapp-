@@ -26,7 +26,7 @@ export default function OrientationManager() {
         meta.content = "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes";
       } else {
         // Landscape — formula font, prevent zoom
-        document.body.style.fontSize = "min(1.17vw, 1.709dvh)";
+        document.body.style.fontSize = "";
         document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
         document.body.style.position = "fixed";
