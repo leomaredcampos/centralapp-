@@ -19,7 +19,7 @@ export default function LoginPage() {
     const body = document.body;
     if (isPortrait) {
       html.style.cssText = "overflow: auto; height: auto; width: 100%;";
-      body.style.cssText = "overflow: auto; height: auto; width: 100%; position: relative; top: auto; left: auto; font-size: 14pt;";
+      body.style.cssText = "overflow: auto; height: auto; width: 100%; position: relative; top: auto; left: auto; font-size: 12pt; font-family: Calibri, sans-serif;";
     }
     return () => {
       html.style.cssText = "";
@@ -43,15 +43,17 @@ export default function LoginPage() {
 
   if (isPortrait) {
     return (
-      <div style={{ width: "100vw", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "white", fontSize: "14pt" }}>
-        <LoginLogo />
+      <div style={{ width: "100vw", minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "white", padding: "40px 24px", fontSize: "12pt", gap: "16px" }}>
+        <div style={{ marginBottom: "24px" }}>
+          <LoginLogo />
+        </div>
         {stepContent}
       </div>
     );
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100dvh", width: "100%", background: "#f5f5f5", fontSize: "14pt" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100dvh", width: "100%", background: "#f5f5f5", fontSize: "12pt" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", background: "white", padding: "20px 20px 40px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
         <LoginLogo />
         {stepContent}
