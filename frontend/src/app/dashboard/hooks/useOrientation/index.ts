@@ -6,7 +6,17 @@ export function useOrientation() {
   const [isPortrait, setIsPortrait] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsPortrait(window.matchMedia("(orientation: portrait)").matches);
+    const check = () => {
+      const mobile = window.innerWidth < 768;
+      setIsPortrait(mobile);
+
+      if (mobile) {
+        try {
+          screen.orientation.lock("portrait").catch(() => {});
+        } catch {}
+      }
+    };
+
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
