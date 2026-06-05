@@ -7,7 +7,7 @@ export function useOrientation() {
 
   useEffect(() => {
     const check = () => {
-      const mobile = window.innerWidth < 1024;
+      const mobile = window.screen.width < 1280 && window.screen.height > window.screen.width;
       setIsPortrait(mobile);
 
       if (mobile) {

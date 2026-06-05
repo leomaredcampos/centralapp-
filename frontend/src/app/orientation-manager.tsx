@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function OrientationManager() {
   useEffect(() => {
     function apply() {
-      const isMobile = window.innerWidth < 1024;
+      const isMobile = window.screen.width < 1280 && window.screen.height > window.screen.width;
 
       if (isMobile) {
         document.body.setAttribute("data-orientation", "portrait");
