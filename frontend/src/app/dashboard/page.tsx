@@ -43,8 +43,8 @@ export default function DashboardPage() {
         <div style={{ height: "2.5dvh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <RightUpper {...rightUpperProps} />
         </div>
-        {/* RightLower - flex:1 */}
-        <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
+        {/* RightLower - 90dvh */}
+        <div style={{ height: "90dvh", overflow: "hidden", minHeight: 0 }}>
           <RightLower {...rightLowerProps} />
         </div>
         {/* LeftLower - always visible */}
