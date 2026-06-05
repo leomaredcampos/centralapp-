@@ -1,5 +1,7 @@
 "use client";
 
+import { useOrientation } from "../hooks/useOrientation";
+
 interface Props {
   count: number;
   onSearch: (query: string) => void;
@@ -11,7 +13,8 @@ interface Props {
 }
 
 export default function LeftLower({ count, onSearch, activeApp, onBack, onUserInfoData, onPayroll, onAccessControl }: Props) {
-  const btnClass = "w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium";
+  const isPortrait = useOrientation();
+  const btnClass = "p-[2px] leading-none bg-transparent border-b-[0.25px] border-black cursor-pointer text-black hover:bg-gray-50 transition-all duration-200";
 
   async function handleLogout() {
     const email = localStorage.getItem("email");
@@ -28,13 +31,36 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
     window.location.href = "/login";
   }
 
+  // ─── PORTRAIT — horizontal layout ─────────────────────────────────
+  if (isPortrait) {
+    return (
+      <div style={{ height: "100%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "8px", padding: "0 10px", flexWrap: "wrap" }}>
+        {activeApp ? (
+          <>
+            <button onClick={onUserInfoData} className={btnClass}>User Info Data</button>
+            <button onClick={onPayroll} className={btnClass}>Payroll Computation</button>
+            <button onClick={onAccessControl} className={btnClass}>Access Control</button>
+            <button onClick={onBack} style={{ background: "transparent", border: "none", borderBottom: "0.25px solid #2563eb", cursor: "pointer", color: "#2563eb", padding: "2px" }}>Main</button>
+          </>
+        ) : (
+          <>
+            <input type="text" placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ padding: "2px 6px", border: "0.25px solid black", outline: "none", borderRadius: "4px", width: "120px" }} />
+            <span style={{ color: "black" }}>{count} module(s)</span>
+            <button onClick={handleLogout} style={{ background: "transparent", border: "none", borderBottom: "0.25px solid #ff0000", cursor: "pointer", color: "#ff0000", padding: "2px" }}>Logout</button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // ─── LANDSCAPE — vertical layout ──────────────────────────────────
   return (
     <div className="h-full flex flex-col p-[10px] gap-[8px]">
       {activeApp ? (
         <>
-          <button onClick={onUserInfoData} className={btnClass}>User Info Data</button>
-          <button onClick={onPayroll} className={btnClass}>Payroll Computation</button>
-          <button onClick={onAccessControl} className={btnClass}>Access Control</button>
+          <button onClick={onUserInfoData} className="w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium">User Info Data</button>
+          <button onClick={onPayroll} className="w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium">Payroll Computation</button>
+          <button onClick={onAccessControl} className="w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium">Access Control</button>
         </>
       ) : (
         <>

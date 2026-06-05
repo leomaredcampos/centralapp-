@@ -29,6 +29,9 @@ export default function AppUserInfoPage() {
         <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
           <AppUserInfoRightBody ref={userInfoRef} />
         </div>
+        <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {mainBtn}
+        </div>
       </div>
     );
   }

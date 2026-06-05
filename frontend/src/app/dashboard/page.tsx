@@ -47,11 +47,10 @@ export default function DashboardPage() {
         <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
           <RightLower {...rightLowerProps} leftLowerProps={leftLowerProps} />
         </div>
-        {activeApp !== "userinfoapp" && !show2FA && (
-          <div style={{ height: "15dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
-            <LeftLower {...leftLowerProps} />
-          </div>
-        )}
+        {/* LeftLower - always visible */}
+        <div style={{ height: "15dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+          <LeftLower {...leftLowerProps} />
+        </div>
       </div>
     );
   }
