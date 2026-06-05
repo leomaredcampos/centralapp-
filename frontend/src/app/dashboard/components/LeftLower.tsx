@@ -35,7 +35,9 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
   if (isPortrait) {
     return (
       <div style={{ height: "100%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "8px", padding: "0 10px", flexWrap: "wrap" }}>
-        {activeApp ? (
+        {activeApp === "2fa" ? (
+          <button onClick={onBack} style={{ background: "transparent", border: "none", borderBottom: "0.25px solid #2563eb", cursor: "pointer", color: "#2563eb", padding: "2px" }}>Main</button>
+        ) : activeApp ? (
           <>
             <button onClick={onUserInfoData} className={btnClass}>User Info Data</button>
             <button onClick={onPayroll} className={btnClass}>Payroll Computation</button>
@@ -56,7 +58,7 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
   // ─── LANDSCAPE — vertical layout ──────────────────────────────────
   return (
     <div className="h-full flex flex-col p-[10px] gap-[8px]">
-      {activeApp ? (
+      {activeApp === "2fa" ? null : activeApp ? (
         <>
           <button onClick={onUserInfoData} className="w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium">User Info Data</button>
           <button onClick={onPayroll} className="w-full p-[2px] leading-none bg-transparent border-t-0 border-b-[0.25px] border-black border-l-0 border-r-0 cursor-pointer text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105 hover:font-medium">Payroll Computation</button>
