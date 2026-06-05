@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { fetchApps } from "./fetchApps";
 import { handleSearch as filterApps } from "./searchHandlers";
 
@@ -19,13 +19,13 @@ export function useDashboardData() {
   const [searchList, setSearchList] = useState<SearchUser[]>([]);
   const appsRef = useRef<App[]>([]);
 
-  async function loadApps(userEmail: string) {
+  const loadApps = useCallback(async (userEmail: string) => {
     const data = await fetchApps(userEmail);
     appsRef.current = data.apps;
     setApps(data.apps);
     setFiltered(data.apps);
     setSearchList(data.searchList);
-  }
+  }, []);
 
   function handleSearch(query: string) {
     const result = filterApps(query, appsRef.current);

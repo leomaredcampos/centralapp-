@@ -25,7 +25,7 @@ export default function DashboardPage() {
   const onValidSession = useCallback((validEmail: string) => {
     setEmail(validEmail);
     loadApps(validEmail);
-  }, []);
+  }, [loadApps]);
 
   useSessionCheck(onValidSession);
 
