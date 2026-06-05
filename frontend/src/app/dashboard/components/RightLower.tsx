@@ -36,7 +36,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
   );
   if (activeApp === "userinfoapp") return (
     <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      <AppUserInfoRightBody ref={userInfoRef} leftLowerProps={leftLowerProps} />
+      <AppUserInfoRightBody ref={userInfoRef} />
     </div>
   );
 

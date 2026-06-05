@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, forwardRef, useImperativeHandle } from "react";
+import { useRouter } from "next/navigation";
 import UserInfoDataGrid from "./components/UserInfoDataGrid";
 import EmployeeInfoPanel from "./components/EmployeeInfoPanel";
 import CompanyInfoPanel from "./components/CompanyInfoPanel";
 import SystemInfoPanel from "./components/SystemInfoPanel";
-import LeftLower from "../../../dashboard/components/LeftLower";
 import { useUserInfoData } from "./hooks/useUserInfoData";
 import { useUserInfoActions } from "./hooks/useUserInfoActions";
 import { useAppAccess } from "./hooks/useAppAccess";
@@ -21,21 +21,10 @@ export interface UserInfoHandle {
   loading: boolean;
 }
 
-interface LeftLowerProps {
-  count: number;
-  onSearch: (query: string) => void;
-  activeApp: string;
-  onBack: () => void;
-  onUserInfoData?: () => void;
-  onPayroll?: () => void;
-  onAccessControl?: () => void;
-}
+interface AppUserInfoProps {}
 
-interface AppUserInfoProps {
-  leftLowerProps?: LeftLowerProps;
-}
-
-const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>(({ leftLowerProps }, ref) => {
+const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>((_, ref) => {
+  const router = useRouter();
   const [form, setForm] = useState({
     fname: "", lname: "", mname: "", sname: "",
     userid: "", usertype: "", userdept: "", userposition: "",
@@ -112,9 +101,14 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>(({ lef
           <SystemInfoPanel isPortrait />
         </div>
       </div>
-      {leftLowerProps && (
-        <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black" }}>
-          <LeftLower {...leftLowerProps} />
+      {isPortrait && (
+        <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <button
+            onClick={() => router.push("/dashboard")}
+            style={{ background: "transparent", border: "none", cursor: "pointer", color: "#2563eb", fontSize: "inherit" }}
+          >
+            Main
+          </button>
         </div>
       )}
     </div>
