@@ -46,7 +46,7 @@ export default function DashboardPage() {
         <div className="flex-1 md:h-[85%] overflow-hidden min-h-0">
           <RightLower show2FA={show2FA} apps={filtered} activeApp={activeApp} onAppClick={(appname) => { auditOpenModule(email, appname.trim()); setActiveApp(appname.trim()); }} userInfoRef={userInfoRef} />
         </div>
-        <div className="md:hidden h-[5vh] flex-shrink-0 border-t-[0.25px] border-black">
+        <div className="md:hidden max-md:h-[5vh] flex-shrink-0 border-t-[0.25px] border-black">
           <LeftLower count={filtered.length} onSearch={handleSearch} activeApp={activeApp} onBack={() => setActiveApp("")} onUserInfoData={() => setActiveApp("userinfoapp")} onPayroll={() => setActiveApp("payroll")} onAccessControl={() => setActiveApp("accesscontrol")} />
         </div>
       </div>
