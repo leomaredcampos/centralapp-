@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, forwardRef, useImperativeHandle } from "react";
-import { useRouter } from "next/navigation";
 import UserInfoDataGrid from "./components/UserInfoDataGrid";
 import EmployeeInfoPanel from "./components/EmployeeInfoPanel";
 import CompanyInfoPanel from "./components/CompanyInfoPanel";
@@ -101,16 +100,6 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>((_, re
           <SystemInfoPanel isPortrait />
         </div>
       </div>
-      {isPortrait && (
-        <div style={{ height: "10vh", flexShrink: 0, borderTop: "0.25px solid black", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <button
-            onClick={() => router.push("/dashboard")}
-            style={{ background: "transparent", border: "none", cursor: "pointer", color: "#2563eb", fontSize: "inherit" }}
-          >
-            Main
-          </button>
-        </div>
-      )}
     </div>
   );
 });
