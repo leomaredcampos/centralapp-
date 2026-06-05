@@ -82,14 +82,14 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle>((_, ref) => {
 
   // ─── PORTRAIT LAYOUT ───────────────────────────────────────────────
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
-      <div style={{ height: "10vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+    <div style={{ width: "100%", height: "90vh", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
+      <div style={{ height: "9vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
       </div>
-      <div style={{ height: "35vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+      <div style={{ height: "31.5vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <EmployeeInfoPanel form={form} onChange={handleChange} />
       </div>
-      <div style={{ height: "30vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
+      <div style={{ height: "27vh", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
         <CompanyInfoPanel form={form} onChange={handleChange} />
       </div>
       <div style={{ flex: 1, overflow: "hidden" }}>
