@@ -40,6 +40,10 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
     </div>
   );
 
+  if (activeApp === "logisticapp") return (
+    <div style={{ width: "100%", height: "100%", overflow: "hidden" }} />
+  );
+
   return (
     <div className="h-full overflow-y-auto p-[10px] md:p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="w-full md:w-[75%] h-full flex flex-col rounded-lg border-[0.25px] border-black shadow-sm bg-white">

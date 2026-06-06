@@ -45,12 +45,12 @@ export default function DashboardPage() {
         <div style={{ height: "2.5dvh", flexShrink: 0, borderBottom: "0.25px solid black" }}>
           <RightUpper {...rightUpperProps} />
         </div>
-        {/* RightLower - 90dvh */}
-        <div style={{ height: "90dvh", overflow: "hidden", minHeight: 0 }}>
+        {/* RightLower - 88dvh */}
+        <div style={{ height: "88dvh", overflow: "hidden", minHeight: 0 }}>
           <RightLower {...rightLowerProps} />
         </div>
-        {/* LeftLower - 5dvh */}
-        <div style={{ height: "5dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
+        {/* LeftLower - 7dvh */}
+        <div style={{ height: "7dvh", flexShrink: 0, borderTop: "0.25px solid black" }}>
           <LeftLower {...leftLowerProps} />
         </div>
       </div>
