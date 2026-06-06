@@ -93,7 +93,7 @@ export default function LeftLower({ count, onSearch, activeApp, onBack, onUserIn
   // ─── PORTRAIT ─────────────────────────────────────────────────────
   if (isPortrait) {
     return (
-      <div style={{ height: "100%", display: "flex", flexDirection: "row", alignItems: "center", gap: "8px", padding: "0 10px", flexWrap: "wrap", alignContent: "center" }}>
+      <div style={{ height: "100%", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center", gap: "8px", padding: "4px 10px", flexWrap: "wrap", alignContent: "flex-start" }}>
         {isMainOnly ? mainBtn :
           activeApp ? (
             <>
