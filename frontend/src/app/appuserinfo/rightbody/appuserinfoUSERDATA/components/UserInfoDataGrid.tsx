@@ -45,7 +45,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Pro
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr className="border-b-[0.25px] border-black">
               <th className="px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "2.2%", position: "sticky", left: 0, zIndex: 20 }}>
-                <input type="checkbox" />
+                <input type="checkbox" style={{ width: "1em", height: "1em" }} />
               </th>
               <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "29.1%", position: "sticky", left: "2.2%", zIndex: 20 }}>Employee Email Address</th>
               <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "9.1%", position: "sticky", left: "31.3%", zIndex: 20 }}>Account Status</th>
@@ -58,7 +58,7 @@ export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Pro
             {displayUsers.map((u, i) => (
               <tr key={i} className="border-b-[0.25px] border-black hover:bg-gray-50 cursor-pointer">
                 <td className="px-[6px] py-[2px] text-center bg-white" style={{ position: "sticky", left: 0, zIndex: 10, width: "2.2%" }}>
-                  <input type="checkbox" checked={selectedRows.includes(u.emailx)} onChange={() => toggleRow(u.emailx)} />
+                  <input type="checkbox" checked={selectedRows.includes(u.emailx)} onChange={() => toggleRow(u.emailx)} style={{ width: "1em", height: "1em" }} />
                 </td>
                 <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "2.2%", zIndex: 10, width: "29.1%" }}>{u.emailx}</td>
                 <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "31.3%", zIndex: 10, width: "9.1%" }}>{u.writemade || "-"}</td>
