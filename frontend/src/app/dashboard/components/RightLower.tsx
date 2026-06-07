@@ -51,7 +51,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
     <div className="h-full overflow-y-auto p-[10px] md:p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <div className="w-full md:w-[75%] h-full flex flex-col rounded-lg border-[0.25px] border-black shadow-sm bg-white">
         <div className="px-[10px] md:px-[20px] py-[8px] md:py-[12px] border-b-[0.25px] border-black">
-          <span className="text-[clamp(11px,1.2vw,22px)] text-black">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
+          <span className="text-black">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
         </div>
         <div className="p-[10px] md:p-[20px] overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>
           <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "6px" }}>
@@ -65,13 +65,13 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
                   <path d="M2 10a4 4 0 0 1 4-4h6l3 3h13a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V10z" fill="#FFCA28"/>
                   <path d="M2 14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-9z" fill="#FFD54F"/>
                 </svg>
-                <span className="text-[clamp(9px,1.5vw,14px)] text-center text-black transition-all duration-200 mt-[2px] px-[2px] leading-tight line-clamp-2">
+                <span className="text-center text-black transition-all duration-200 mt-[2px] px-[2px] leading-tight line-clamp-2">
                   {app.buttonname}
                 </span>
               </div>
             ))}
             {apps.length === 0 && (
-              <p className="text-[clamp(11px,1.2vw,22px)] text-black col-span-full text-center py-[20px]">No modules available.</p>
+              <p className="text-black col-span-full text-center py-[20px]">No modules available.</p>
             )}
           </div>
         </div>
