@@ -13,7 +13,7 @@ export default function OrientationManager() {
           background: #ffffff;
           color: #000000;
           font-family: Calibri, sans-serif;
-          font-size: min(1.17vw, 1.709dvh);
+          font-size: max(7pt, min(1.17vw, 1.709dvh));
           -webkit-text-size-adjust: none;
           text-size-adjust: none;
         `;
@@ -25,7 +25,7 @@ export default function OrientationManager() {
           background: #ffffff;
           color: #000000;
           font-family: Calibri, sans-serif;
-          font-size: min(1.17vw, 1.709dvh);
+          font-size: max(7pt, min(1.17vw, 1.709dvh));
           width: 100dvw;
           height: 100dvh;
           overflow: hidden;
