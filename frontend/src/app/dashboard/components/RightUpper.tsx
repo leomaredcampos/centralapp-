@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { UserInfoHandle } from "../../appuserinfo/rightbody/appuserinfoUSERDATA/page";
+import { useOrientation } from "../../dashboard/hooks/useOrientation";
 
 interface Props {
   email: string;
@@ -21,6 +22,8 @@ const btnClass = "px-[8px] py-[1px] bg-white border-[0.25px] border-black cursor
 
 export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, searchList = [], searchVal = "", onSearchChange, onPrev, onNext, userInfoRef }: Props) {
   const isUserInfo = activeApp === "userinfoapp";
+  const layout = useOrientation();
+  const isSmall = layout === "portrait-small";
   const [moduleSearch, setModuleSearch] = useState("");
   const [showModuleDropdown, setShowModuleDropdown] = useState(false);
   const moduleRef = useRef<HTMLDivElement>(null);
@@ -28,12 +31,9 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
   const appList = userInfoRef?.current?.getAppList() ?? [];
   const selectedApps = userInfoRef?.current?.getSelectedApps() ?? [];
   const files = userInfoRef?.current?.getFiles() ?? null;
-  const filteredApps = appList.filter((a) => a.buttonname.toLowerCase().includes(moduleSearch.toLowerCase()));
-  const selectedLabels = appList.filter((a) => selectedApps.includes(a.appname)).map((a) => a.buttonname).join(", ");
 
   return (
     <div className="h-full flex flex-col">
-      {/* Row 1 */}
       <div className="flex-1 flex flex-wrap items-center px-[6px] md:px-[10px] gap-[4px] md:gap-[8px] overflow-hidden">
         <span className="shrink-0">{show2FA ? "2FA" : isUserInfo ? "Employee Info" : "Module"}</span>
         {isUserInfo && !show2FA && (
@@ -51,11 +51,11 @@ export default function RightUpper({ email, show2FA, activeApp, on2FA, onBack, s
           {!isUserInfo && !show2FA && (
             <button onClick={on2FA} className="text-blue-600 bg-transparent border-none cursor-pointer hover:underline whitespace-nowrap">2FA</button>
           )}
-          <span className="truncate max-w-[120px] md:max-w-none">{email}</span>
+          {!(isUserInfo && isSmall) && (
+            <span className="truncate max-w-[120px] md:max-w-none">{email}</span>
+          )}
         </div>
       </div>
-
-      {/* Row 2 removed */}
     </div>
   );
 }

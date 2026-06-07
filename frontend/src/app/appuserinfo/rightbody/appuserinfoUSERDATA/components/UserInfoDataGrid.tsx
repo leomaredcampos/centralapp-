@@ -32,15 +32,33 @@ export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows, isSma
 
   return (
     <div className="flex flex-col rounded-lg shadow-sm bg-white" style={{ overflow: "hidden" }}>
-      <div className="flex-shrink-0 px-[6px] py-[2px] border-b-[0.25px] border-black bg-gray-50 flex flex-wrap items-center gap-[4px]">
-        <input placeholder="Type to search..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "25.5%" }} />
-        <span className="text-black">Search</span>
-        <button onClick={onPrev} className={btnClass}>Prev</button>
-        <button onClick={onNext} className={btnClass}>Next</button>
-        <span className="text-black">Module Access</span>
-        <input placeholder="Select modules..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "18.3%" }} />
-        <button className={btnClass}>Update</button>
-      </div>
+      {isSmall ? (
+        <>
+          {/* Row 1 */}
+          <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50 flex items-center gap-[4px]">
+            <input placeholder="Type to search..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ flex: 1 }} />
+            <span className="text-black">Search</span>
+            <button onClick={onPrev} className={btnClass}>Prev</button>
+            <button onClick={onNext} className={btnClass}>Next</button>
+          </div>
+          {/* Row 2 */}
+          <div className="flex-shrink-0 px-[6px] py-[1px] border-b-[0.25px] border-black bg-gray-50 flex items-center gap-[4px]">
+            <span className="text-black whitespace-nowrap">Module Access</span>
+            <input placeholder="Select modules..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ flex: 1 }} />
+            <button className={btnClass}>Update</button>
+          </div>
+        </>
+      ) : (
+        <div className="flex-shrink-0 px-[6px] py-[2px] border-b-[0.25px] border-black bg-gray-50 flex flex-wrap items-center gap-[4px]">
+          <input placeholder="Type to search..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "25.5%" }} />
+          <span className="text-black">Search</span>
+          <button onClick={onPrev} className={btnClass}>Prev</button>
+          <button onClick={onNext} className={btnClass}>Next</button>
+          <span className="text-black">Module Access</span>
+          <input placeholder="Select modules..." className="p-[1px] border-[0.25px] border-black outline-none" style={{ width: "18.3%" }} />
+          <button className={btnClass}>Update</button>
+        </div>
+      )}
       <div style={{ flex: 1, overflow: "auto", scrollbarWidth: "thin", scrollbarColor: "#d1d5db transparent", position: "relative" }}>
         <table style={{ borderCollapse: "collapse", tableLayout: "fixed", width: "100%" }}>
           <thead className="sticky top-0 bg-gray-50 z-10">
