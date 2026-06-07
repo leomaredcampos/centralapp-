@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import TwoFactorPage from "../../2fa/page";
 import AppUserInfoRightBody, { UserInfoHandle } from "../../appuserinfo/rightbody/appuserinfoUSERDATA/page";
+import { useOrientation } from "../../dashboard/hooks/useOrientation";
 
 interface App {
   appname: string;
@@ -29,6 +30,8 @@ interface Props {
 }
 
 export default function RightLower({ show2FA, apps, activeApp, onAppClick, userInfoRef, leftLowerProps }: Props) {
+  const layout = useOrientation();
+  const cols = layout === "portrait-small" ? 3 : 5;
   if (show2FA) return (
     <div className="h-full bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <TwoFactorPage />
@@ -51,7 +54,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
           <span className="text-[clamp(11px,1.2vw,22px)] text-black">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
         </div>
         <div className="p-[10px] md:p-[20px] overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-[6px] md:gap-[10px]">
+          <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "6px" }}>
             {apps.map((app) => (
               <div
                 key={app.appname}
