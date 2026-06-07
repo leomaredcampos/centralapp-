@@ -49,7 +49,7 @@ export default function RightLower({ show2FA, apps, activeApp, onAppClick, userI
 
   return (
     <div className="h-full overflow-y-auto p-[10px] md:p-[20px] flex justify-center items-stretch bg-gradient-to-br from-white via-gray-50 to-gray-100">
-      <div className="w-full md:w-[75%] h-full flex flex-col rounded-lg border-[0.25px] border-black shadow-sm bg-white">
+      <div className="w-full h-full flex flex-col rounded-lg border-[0.25px] border-black shadow-sm bg-white">
         <div className="px-[10px] md:px-[20px] py-[8px] md:py-[12px] border-b-[0.25px] border-black">
           <span className="text-black">{apps.length} accessible module{apps.length !== 1 ? "s" : ""}</span>
         </div>
