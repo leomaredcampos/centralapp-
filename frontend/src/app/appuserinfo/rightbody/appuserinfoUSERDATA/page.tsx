@@ -56,17 +56,17 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>((_, re
     loading,
   }));
 
-  const isPortrait = useOrientation();
+  const layout = useOrientation();
+  const isPortrait = layout !== "landscape";
+  const isSmall = layout === "portrait-small";
 
   // ─── LANDSCAPE LAYOUT ──────────────────────────────────────────────
   if (!isPortrait) {
     return (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", borderRadius: "8px", background: "white" }}>
-        {/* Datagrid - 35% */}
         <div style={{ height: "35%", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
           <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} />
         </div>
-        {/* 3 Columns - 63% */}
         <div style={{ height: "63%", display: "flex", overflow: "hidden" }}>
           <div style={{ width: "48%", height: "100%", overflow: "hidden" }}>
             <EmployeeInfoPanel form={form} onChange={handleChange} />
@@ -86,7 +86,7 @@ const AppUserInfoRightBody = forwardRef<UserInfoHandle, AppUserInfoProps>((_, re
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", border: "0.25px solid black", background: "white" }}>
       <div style={{ height: "20%", flexShrink: 0, borderBottom: "0.25px solid black", overflow: "hidden" }}>
-        <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} maxRows={5} />
+        <UserInfoDataGrid users={users} onPrev={handlePrev} onNext={handleNext} maxRows={5} isSmall={isSmall} />
       </div>
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }}>
         <div style={{ borderBottom: "0.25px solid black" }}>

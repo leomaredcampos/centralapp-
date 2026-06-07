@@ -2,15 +2,23 @@
 
 import { useState, useEffect } from "react";
 
-export function useOrientation() {
-  const [isPortrait, setIsPortrait] = useState(false);
+export type LayoutType = "landscape" | "portrait-small" | "portrait-large";
+
+export function useOrientation(): LayoutType {
+  const [layout, setLayout] = useState<LayoutType>("landscape");
 
   useEffect(() => {
     const check = () => {
-      const mobile = window.screen.width < 1280 && window.screen.height > window.screen.width;
-      setIsPortrait(mobile);
+      const isPortrait = window.screen.height > window.screen.width;
+      if (!isPortrait) {
+        setLayout("landscape");
+      } else if (window.screen.width <= 480) {
+        setLayout("portrait-small");
+      } else {
+        setLayout("portrait-large");
+      }
 
-      if (mobile) {
+      if (isPortrait) {
         try {
           (screen.orientation as any).lock("portrait").catch(() => {});
         } catch {}
@@ -22,5 +30,5 @@ export function useOrientation() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  return isPortrait;
+  return layout;
 }

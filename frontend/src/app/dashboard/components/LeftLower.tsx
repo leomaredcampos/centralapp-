@@ -23,7 +23,8 @@ interface Props {
 }
 
 export default function LeftLower({ count, onSearch, activeApp, onBack, onUserInfoData, onPayroll, onAccessControl, apps = [], onAppClick, searchVal = "", onSearchChange }: Props) {
-  const isPortrait = useOrientation();
+  const layout = useOrientation();
+  const isPortrait = layout !== "landscape";
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

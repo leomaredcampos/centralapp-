@@ -20,7 +20,8 @@ export default function DashboardPage() {
 
   const { filtered, searchList, loadApps, handleSearch } = useDashboardData();
   const { searchVal, setSearchVal, handlePrev, handleNext } = useSearchNavigation(searchList);
-  const isPortrait = useOrientation();
+  const layout = useOrientation();
+  const isPortrait = layout !== "landscape";
 
   const onValidSession = useCallback((validEmail: string) => {
     setEmail(validEmail);

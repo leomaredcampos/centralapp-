@@ -9,7 +9,8 @@ import { useOrientation } from "../dashboard/hooks/useOrientation";
 export default function LoginPage() {
   const { email, setEmail, otp, setOtp, step, setStep, otpExpires, handleEmailStepResult } = useLoginState();
   const { handleEmailSubmit, handleOTPVerify, handleTOTPVerify } = useLoginFlow(email, otp);
-  const isPortrait = useOrientation();
+  const layout = useOrientation();
+  const isPortrait = layout !== "landscape";
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
 

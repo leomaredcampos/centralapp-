@@ -17,11 +17,12 @@ interface Props {
   onPrev?: () => void;
   onNext?: () => void;
   maxRows?: number;
+  isSmall?: boolean;
 }
 
 const btnClass = "px-[8px] py-[1px] bg-white border-[0.25px] border-black cursor-pointer hover:bg-gray-50";
 
-export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Props) {
+export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows, isSmall }: Props) {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const displayUsers = maxRows ? users.slice(0, maxRows) : users;
 
@@ -47,11 +48,11 @@ export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Pro
               <th className="px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "2.2%", position: "sticky", left: 0, zIndex: 20 }}>
                 <input type="checkbox" style={{ width: "1em", height: "1em" }} />
               </th>
-              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "29.1%", position: "sticky", left: "2.2%", zIndex: 20 }}>Employee Email Address</th>
-              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "9.1%", position: "sticky", left: "31.3%", zIndex: 20 }}>Account Status</th>
-              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "13.6%" }}>As Date of</th>
-              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "13.6%" }}>Expiration Date</th>
-              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "31.8%" }}>Written By</th>
+              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: isSmall ? "68%" : "29.1%", position: "sticky", left: "2.2%", zIndex: 20 }}>Employee Email Address</th>
+              <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: isSmall ? "29.8%" : "9.1%", position: "sticky", left: "31.3%", zIndex: 20 }}>Account Status</th>
+              {!isSmall && <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "13.6%" }}>As Date of</th>}
+              {!isSmall && <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "13.6%" }}>Expiration Date</th>}
+              {!isSmall && <th className="text-left px-[6px] py-[3px] text-black font-normal bg-gray-50" style={{ width: "31.8%" }}>Written By</th>}
             </tr>
           </thead>
           <tbody>
@@ -60,11 +61,11 @@ export default function UserInfoDataGrid({ users, onPrev, onNext, maxRows }: Pro
                 <td className="px-[6px] py-[2px] text-center bg-white" style={{ position: "sticky", left: 0, zIndex: 10, width: "2.2%" }}>
                   <input type="checkbox" checked={selectedRows.includes(u.emailx)} onChange={() => toggleRow(u.emailx)} style={{ width: "1em", height: "1em" }} />
                 </td>
-                <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "2.2%", zIndex: 10, width: "29.1%" }}>{u.emailx}</td>
-                <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "31.3%", zIndex: 10, width: "9.1%" }}>{u.writemade || "-"}</td>
-                <td className="px-[6px] py-[2px]">{u.datemade ? new Date(u.datemade).toLocaleDateString() : "-"}</td>
-                <td className="px-[6px] py-[2px]">{u.expirationdate ? new Date(u.expirationdate).toLocaleDateString() : "-"}</td>
-                <td className="px-[6px] py-[2px]">{u.writeremail || "-"}</td>
+                <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "2.2%", zIndex: 10, width: isSmall ? "68%" : "29.1%" }}>{u.emailx}</td>
+                <td className="px-[6px] py-[2px] bg-white" style={{ position: "sticky", left: "31.3%", zIndex: 10, width: isSmall ? "29.8%" : "9.1%" }}>{u.writemade || "-"}</td>
+                {!isSmall && <td className="px-[6px] py-[2px]">{u.datemade ? new Date(u.datemade).toLocaleDateString() : "-"}</td>}
+                {!isSmall && <td className="px-[6px] py-[2px]">{u.expirationdate ? new Date(u.expirationdate).toLocaleDateString() : "-"}</td>}
+                {!isSmall && <td className="px-[6px] py-[2px]">{u.writeremail || "-"}</td>}
               </tr>
             ))}
             {users.length === 0 && (
