@@ -5,6 +5,7 @@ import LoginLogo from "./components/LoginLogo";
 import { useLoginState } from "./hooks/useLoginState";
 import { useLoginFlow } from "./hooks/useLoginFlow";
 import { useOrientation } from "../dashboard/hooks/useOrientation";
+import MessageModal from "./components/MessageModal";
 
 export default function LoginPage() {
   const { email, setEmail, otp, setOtp, step, setStep, otpExpires, handleEmailStepResult } = useLoginState();
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const isPortrait = layout !== "landscape";
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     const html = document.documentElement;
@@ -28,11 +30,16 @@ export default function LoginPage() {
     setLoading(true);
     if (step === "email") {
       const data = await handleEmailSubmit();
-      handleEmailStepResult(data);
+      if (data.status === "not_found") setModalMessage("Email not found.");
+      else if (data.status === "locked") setModalMessage("This account is currently in use.");
+      else handleEmailStepResult(data);
     } else if (step === "otp") {
-      await handleOTPVerify();
+      const data = await handleOTPVerify();
+      if (data.status === "invalid_otp") setModalMessage("Invalid OTP.");
     } else if (step === "totp") {
-      await handleTOTPVerify(code);
+      const data = await handleTOTPVerify(code);
+      if (data.status === "invalid") setModalMessage("Invalid authenticator code.");
+      else if (data.status === "max_sessions") setModalMessage("Maximum of 3 active sessions reached.");
     }
     setLoading(false);
   }
@@ -59,6 +66,7 @@ export default function LoginPage() {
   if (isPortrait) {
     return (
       <div style={{ width: "100vw", height: "100dvh", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "white", fontSize: "9.5pt", padding: "40px 24px" }}>
+        {modalMessage && <MessageModal message={modalMessage} onClose={() => { setModalMessage(""); if (step === "email") setEmail(""); else if (step === "otp") setOtp(""); else setCode(""); }} />}
         {/* TOP */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <LoginLogo />
@@ -104,6 +112,7 @@ export default function LoginPage() {
 
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100dvh", width: "100%", background: "#f5f5f5", fontSize: "12pt" }}>
+      {modalMessage && <MessageModal message={modalMessage} onClose={() => { setModalMessage(""); if (step === "email") setEmail(""); else if (step === "otp") setOtp(""); else setCode(""); }} />}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", background: "white", padding: "40px 60px 60px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
         <LoginLogo />
         {stepContent}
