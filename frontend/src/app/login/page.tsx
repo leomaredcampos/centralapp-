@@ -29,6 +29,12 @@ export default function LoginPage() {
     return () => { html.style.cssText = ""; body.style.cssText = ""; };
   }, [isPortrait]);
 
+  useEffect(() => {
+    if (step === "email") emailRef.current?.focus();
+    else if (step === "otp") otpRef.current?.focus();
+    else codeRef.current?.focus();
+  }, [step]);
+
   function closeModal() {
     setModalMessage("");
     if (step === "email") { setEmail(""); setTimeout(() => emailRef.current?.focus(), 0); }
