@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import LoginLogo from "./components/LoginLogo";
 import { useLoginState } from "./hooks/useLoginState";
 import { useLoginFlow } from "./hooks/useLoginFlow";
@@ -15,6 +15,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
   const [modalMessage, setModalMessage] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const otpRef = useRef<HTMLInputElement>(null);
+  const codeRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -25,6 +28,13 @@ export default function LoginPage() {
     }
     return () => { html.style.cssText = ""; body.style.cssText = ""; };
   }, [isPortrait]);
+
+  function closeModal() {
+    setModalMessage("");
+    if (step === "email") { setEmail(""); setTimeout(() => emailRef.current?.focus(), 0); }
+    else if (step === "otp") { setOtp(""); setTimeout(() => otpRef.current?.focus(), 0); }
+    else { setCode(""); setTimeout(() => codeRef.current?.focus(), 0); }
+  }
 
   async function onContinue() {
     setLoading(true);
@@ -48,17 +58,17 @@ export default function LoginPage() {
   const btnLabel = step === "email" ? "Continue" : "Verify";
   const inputEl = step === "email" ? (
     <>
-      <input autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
+      <input ref={emailRef} autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>Email Address</p>
     </>
   ) : step === "otp" ? (
     <>
-      <input autoFocus type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input ref={otpRef} autoFocus type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>OTP</p>
     </>
   ) : (
     <>
-      <input autoFocus type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input ref={codeRef} autoFocus type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "95vw", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "4px 0 0 0", color: "black" }}>Authenticator Code</p>
     </>
   );
@@ -66,7 +76,7 @@ export default function LoginPage() {
   if (isPortrait) {
     return (
       <div style={{ width: "100vw", height: "100dvh", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "white", fontSize: "9.5pt", padding: "40px 24px" }}>
-        {modalMessage && <MessageModal message={modalMessage} onClose={() => { setModalMessage(""); if (step === "email") setEmail(""); else if (step === "otp") setOtp(""); else setCode(""); }} />}
+        {modalMessage && <MessageModal message={modalMessage} onClose={closeModal} />}
         {/* TOP */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <LoginLogo />
@@ -90,21 +100,21 @@ export default function LoginPage() {
   const stepContent = step === "email" ? (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Login</p>
-      <input autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
+      <input ref={emailRef} autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} placeholder="Email Address" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>Email Address</p>
       <button onClick={onContinue} disabled={loading} style={{ width: "500px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Continue</button>
     </>
   ) : step === "otp" ? (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Verification</p>
-      <input autoFocus type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input ref={otpRef} autoFocus type="text" value={otp} onChange={(e) => setOtp(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter OTP" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>OTP</p>
       <button onClick={onContinue} disabled={loading} style={{ width: "500px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
     </>
   ) : (
     <>
       <p style={{ margin: "5px 0", textAlign: "center", color: "black" }}>Authenticator</p>
-      <input autoFocus type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
+      <input ref={codeRef} autoFocus type="text" value={code} onChange={(e) => setCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onContinue()} maxLength={6} placeholder="Enter Code" style={{ width: "500px", padding: "4px", border: "0.25px solid black", outline: "none", textAlign: "center", letterSpacing: "4px", fontSize: "inherit" }} />
       <p style={{ margin: "2px 0 0 0", textAlign: "center", color: "black" }}>Authenticator Code</p>
       <button onClick={onContinue} disabled={loading} style={{ width: "500px", padding: "4px", background: "white", border: "none", borderTop: "0.25px solid black", borderBottom: "0.25px solid black", cursor: "pointer", marginTop: "15px", fontSize: "inherit" }}>Verify</button>
     </>
@@ -112,7 +122,7 @@ export default function LoginPage() {
 
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100dvh", width: "100%", background: "#f5f5f5", fontSize: "12pt" }}>
-      {modalMessage && <MessageModal message={modalMessage} onClose={() => { setModalMessage(""); if (step === "email") setEmail(""); else if (step === "otp") setOtp(""); else setCode(""); }} />}
+      {modalMessage && <MessageModal message={modalMessage} onClose={closeModal} />}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", background: "white", padding: "40px 60px 60px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
         <LoginLogo />
         {stepContent}
