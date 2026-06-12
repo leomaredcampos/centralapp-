@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import MessageModal from "./MessageModal";
 
 interface Props {
   onSubmit: (code: string) => Promise<{ status: string; remaining?: number }>;
@@ -10,6 +11,8 @@ export default function AuthenticatorStep({ onSubmit }: Props) {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [modalMessage, setModalMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (countdown <= 0) return;
@@ -23,13 +26,25 @@ export default function AuthenticatorStep({ onSubmit }: Props) {
     const data = await onSubmit(code);
     setLoading(false);
     if (data.status === "attempt_locked") setCountdown(data.remaining || 60);
-    else if (data.status === "invalid") alert("Invalid authenticator code.");
+    else if (data.status === "invalid") setModalMessage("Invalid authenticator code.");
+    else if (data.status === "max_sessions") setModalMessage("Maximum of 3 active sessions reached.");
   }
 
   return (
     <>
+      {modalMessage && (
+        <MessageModal
+          message={modalMessage}
+          onClose={() => {
+            setModalMessage("");
+            setCode("");
+            inputRef.current?.focus();
+          }}
+        />
+      )}
       <p className="text-center text-black mt-[5px] mb-[5px]">Authenticator</p>
       <input
+        ref={inputRef}
         type="text"
         value={code}
         onChange={(e) => setCode(e.target.value)}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import MessageModal from "./MessageModal";
 
 interface Props {
   email: string;
@@ -11,6 +12,8 @@ interface Props {
 export default function EmailStep({ email, setEmail, onSubmit }: Props) {
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [modalMessage, setModalMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (countdown <= 0) return;
@@ -26,16 +29,27 @@ export default function EmailStep({ email, setEmail, onSubmit }: Props) {
     if (data.status === "attempt_locked") {
       setCountdown(data.remaining || 60);
     } else if (data.status === "not_found") {
-      alert("Email not found.");
+      setModalMessage("Email not found.");
     } else if (data.status === "locked") {
-      alert("This account is currently in use.");
+      setModalMessage("This account is currently in use.");
     }
   }
 
   return (
     <>
+      {modalMessage && (
+        <MessageModal
+          message={modalMessage}
+          onClose={() => {
+            setModalMessage("");
+            setEmail("");
+            inputRef.current?.focus();
+          }}
+        />
+      )}
       <p className="text-center text-black mt-[5px] mb-[5px]">Login</p>
       <input
+        ref={inputRef}
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}

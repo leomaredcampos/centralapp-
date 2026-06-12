@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import MessageModal from "./MessageModal";
 
 interface Props {
   otp: string;
@@ -14,6 +15,8 @@ export default function OtpStep({ otp, setOtp, onSubmit, expiresIn, onExpired }:
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [otpTimer, setOtpTimer] = useState(expiresIn);
+  const [modalMessage, setModalMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { setOtpTimer(expiresIn); }, [expiresIn]);
 
@@ -35,7 +38,7 @@ export default function OtpStep({ otp, setOtp, onSubmit, expiresIn, onExpired }:
     const data = await onSubmit();
     setLoading(false);
     if (data.status === "attempt_locked") setCountdown(data.remaining || 60);
-    else if (data.status === "invalid_otp") alert("Invalid OTP.");
+    else if (data.status === "invalid_otp") setModalMessage("Invalid OTP.");
     else if (data.status === "otp_expired") onExpired();
   }
 
@@ -44,8 +47,19 @@ export default function OtpStep({ otp, setOtp, onSubmit, expiresIn, onExpired }:
 
   return (
     <>
+      {modalMessage && (
+        <MessageModal
+          message={modalMessage}
+          onClose={() => {
+            setModalMessage("");
+            setOtp("");
+            inputRef.current?.focus();
+          }}
+        />
+      )}
       <p className="text-center text-black mt-[5px] mb-[5px]">Verification</p>
       <input
+        ref={inputRef}
         type="text"
         value={otp}
         onChange={(e) => setOtp(e.target.value)}

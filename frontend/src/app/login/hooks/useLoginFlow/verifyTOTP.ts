@@ -12,7 +12,7 @@ export async function verifyTOTP(email: string, code: string) {
     localStorage.setItem("authtype", "totp");
     window.location.href = "/dashboard";
   } else if (data.status === "max_sessions") {
-    alert("Maximum of 3 active sessions reached.");
+    // handled by caller
   }
   return data;
 }
